@@ -1,0 +1,6 @@
+{
+  "name": "Mireille Hoffmann",
+  "description": "Santuario para la voz y el bienestar. Landing page de Mireille Hoffmann Vocal Studio, que enseña el Método 3C y técnicas de voz integrales.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

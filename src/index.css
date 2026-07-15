@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", serif;
+  --font-serif: "Source Serif 4", serif;
+  --font-sans: "Hanken Grotesk", sans-serif;
+  
+  --color-primary: #0b1728;
+  --color-secondary: #9f402d;
+  --color-background: #fff8f4;
+  --color-surface: #fff8f4;
+  --color-surface-dim: #e1d8d2;
+  --color-surface-bright: #fff8f4;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #fbf2eb;
+  --color-surface-container: #f5ece5;
+  --color-surface-container-high: #f0e7df;
+  --color-surface-container-highest: #eae1da;
+  --color-on-surface: #1f1b17;
+  --color-on-surface-variant: #44474c;
+  --color-inverse-surface: #34302b;
+  --color-inverse-on-surface: #f8efe8;
+  --color-outline: #75777d;
+  --color-outline-variant: #c5c6cd;
+  
+  --spacing-margin-desktop: 64px;
+  --spacing-margin-mobile: 20px;
+  --spacing-gutter: 24px;
+  --spacing-container-max: 1280px;
+}
+
+/* Custom baseline styling conforming to Brand and Style guidelines */
+body {
+  font-family: var(--font-serif);
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-display);
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+.vocal-shadow {
+  box-shadow: 0 10px 40px rgba(11, 23, 40, 0.08);
+}
+
+/* Hide scrollbar but keep functionality */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-container-high);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-outline-variant);
+}
