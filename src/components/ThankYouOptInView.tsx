@@ -76,9 +76,12 @@ export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) 
               Un paso más, si quieres
             </span>
             <h3 className="font-display text-xl font-bold text-primary mb-3">
-              Primera sesión de diagnóstico vocal a $15
-              <span className="text-on-surface-variant font-serif text-sm font-normal"> (normalmente $30)</span>
+              Primera sesión de diagnóstico vocal
             </h3>
+            <div className="flex items-baseline gap-2 mb-4">
+              <span className="font-serif text-3xl font-bold text-secondary">$15</span>
+              <span className="font-serif text-base text-on-surface-variant line-through">$30</span>
+            </div>
             <p className="font-serif text-sm text-on-surface-variant leading-relaxed mb-6">
               Una hora contigo en vivo para identificar exactamente dónde está tu voz hoy — sin compromiso de seguir después.
             </p>
