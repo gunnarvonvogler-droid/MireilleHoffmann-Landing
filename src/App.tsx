@@ -3,6 +3,8 @@ import Header from './components/Header';
 import HomeView from './components/HomeView';
 import ApplyNowView from './components/ApplyNowView';
 import ContactView from './components/ContactView';
+import OptInView from './components/OptInView';
+import ThankYouOptInView from './components/ThankYouOptInView';
 import { ScreenType } from './types';
 import { ArrowUp, Sparkles, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -16,13 +18,15 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash === '#apply') {
-        setScreen('apply');
-      } else if (hash === '#contact') {
-        setScreen('contact');
-      } else {
-        setScreen('home');
-      }
+      const hashToScreen: Record<string, ScreenType> = {
+        '#apply': 'apply',
+        '#contact': 'contact',
+        '#guia-cantantes': 'optin-cantantes',
+        '#guia-oradores': 'optin-oradores',
+        '#gracias-cantantes': 'gracias-cantantes',
+        '#gracias-oradores': 'gracias-oradores',
+      };
+      setScreen(hashToScreen[hash] || 'home');
     };
 
     handleHashChange(); // Run on initial load
@@ -33,10 +37,18 @@ export default function App() {
   const handleScreenChange = (newScreen: ScreenType) => {
     setScreen(newScreen);
     // Update hash gracefully
+    const screenToHash: Partial<Record<ScreenType, string>> = {
+      apply: '#apply',
+      contact: '#contact',
+      'optin-cantantes': '#guia-cantantes',
+      'optin-oradores': '#guia-oradores',
+      'gracias-cantantes': '#gracias-cantantes',
+      'gracias-oradores': '#gracias-oradores',
+    };
     if (newScreen === 'home') {
       window.history.pushState(null, '', ' ');
     } else {
-      window.location.hash = newScreen;
+      window.location.hash = screenToHash[newScreen] || newScreen;
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -87,6 +99,18 @@ export default function App() {
             )}
             {screen === 'contact' && (
               <ContactView />
+            )}
+            {screen === 'optin-cantantes' && (
+              <OptInView audience="cantantes" setScreen={handleScreenChange} />
+            )}
+            {screen === 'optin-oradores' && (
+              <OptInView audience="oradores" setScreen={handleScreenChange} />
+            )}
+            {screen === 'gracias-cantantes' && (
+              <ThankYouOptInView audience="cantantes" />
+            )}
+            {screen === 'gracias-oradores' && (
+              <ThankYouOptInView audience="oradores" />
             )}
           </motion.div>
         </AnimatePresence>

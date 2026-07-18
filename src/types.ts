@@ -1,4 +1,13 @@
-export type ScreenType = 'home' | 'apply' | 'contact';
+export type ScreenType =
+  | 'home'
+  | 'apply'
+  | 'contact'
+  | 'optin-cantantes'
+  | 'optin-oradores'
+  | 'gracias-cantantes'
+  | 'gracias-oradores';
+
+export type Audience = 'cantantes' | 'oradores';
 
 export interface FormState {
   name: string;
