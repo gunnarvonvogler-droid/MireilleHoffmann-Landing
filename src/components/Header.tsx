@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { ScreenType } from '../types';
+import isotipo from '../assets/isotipo.svg';
 
 interface HeaderProps {
   currentScreen: ScreenType;
@@ -57,9 +58,12 @@ export default function Header({ currentScreen, setScreen }: HeaderProps) {
         <a
           href="/"
           onClick={handleLogoClick}
-          className="font-display text-2xl md:text-3xl font-bold tracking-tight text-primary hover:opacity-90 transition-opacity"
+          className="flex items-center gap-2.5 md:gap-3 hover:opacity-90 transition-opacity"
         >
-          Mireille Hoffmann
+          <img src={isotipo} alt="" className="w-8 h-8 md:w-9 md:h-9 flex-none" />
+          <span className="font-display text-2xl md:text-3xl font-bold tracking-tight text-primary">
+            Mireille Hoffmann
+          </span>
         </a>
 
         {/* Desktop Navigation */}
