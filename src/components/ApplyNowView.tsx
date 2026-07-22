@@ -326,13 +326,35 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                     <div className="grid grid-cols-2 gap-y-2 text-sm font-serif">
                       <span className="text-on-surface-variant">Programa:</span>
                       <span className="font-bold text-primary text-right">{formData.planSeleccionado}</span>
-                      
+
                       <span className="text-on-surface-variant">Registro Vocal:</span>
                       <span className="font-bold text-primary text-right uppercase">{formData.rangoVocal}</span>
-                      
+
                       <span className="text-on-surface-variant">Experiencia:</span>
                       <span className="font-bold text-primary text-right capitalize">{formData.experiencia}</span>
                     </div>
+                  </div>
+
+                  <div className="w-full bg-surface-container-low border border-surface-variant rounded-xl p-6 mb-10 text-left">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Calendar size={16} className="text-secondary" />
+                      <h5 className="font-sans text-[10px] uppercase tracking-widest font-bold text-secondary">
+                        Taller Grupal Gratuito
+                      </h5>
+                    </div>
+                    <p className="font-serif text-sm text-on-surface-variant leading-relaxed mb-4">
+                      Mientras revisamos tu aplicación, te invitamos a nuestro taller grupal gratuito de técnica vocal — todos los <strong className="text-primary font-bold">miércoles a las 7:00 pm (hora El Salvador)</strong>, 45 minutos por Zoom.
+                    </p>
+                    {/* TODO: reemplazar por el link de Zoom recurrente cuando exista */}
+                    <a
+                      href="https://wa.me/50366801471?text=Hola%20Mireille,%20quisiera%20el%20link%20de%20Zoom%20del%20taller%20grupal%20del%20miércoles"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full bg-secondary hover:bg-secondary/90 text-white font-sans text-xs uppercase tracking-widest font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-colors duration-300 shadow-md"
+                    >
+                      Pedir el link del taller
+                      <ArrowRight size={14} />
+                    </a>
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-4 w-full">
