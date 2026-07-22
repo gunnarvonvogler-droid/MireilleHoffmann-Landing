@@ -343,16 +343,15 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                       </h5>
                     </div>
                     <p className="font-serif text-sm text-on-surface-variant leading-relaxed mb-4">
-                      Mientras revisamos tu aplicación, te invitamos a nuestro taller grupal gratuito de técnica vocal — todos los <strong className="text-primary font-bold">miércoles a las 7:00 pm (hora El Salvador)</strong>, 45 minutos por Zoom.
+                      Mientras revisamos tu aplicación, te invitamos a nuestro taller grupal gratuito de técnica vocal — todos los <strong className="text-primary font-bold">miércoles a las 7:00 pm (hora El Salvador)</strong>, 45 minutos por Google Meet.
                     </p>
-                    {/* TODO: reemplazar por el link de Zoom recurrente cuando exista */}
                     <a
-                      href="https://wa.me/50366801471?text=Hola%20Mireille,%20quisiera%20el%20link%20de%20Zoom%20del%20taller%20grupal%20del%20miércoles"
+                      href="https://meet.google.com/wjt-cguv-niu"
                       target="_blank"
                       rel="noreferrer"
                       className="w-full bg-secondary hover:bg-secondary/90 text-white font-sans text-xs uppercase tracking-widest font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-colors duration-300 shadow-md"
                     >
-                      Pedir el link del taller
+                      Unirme al taller
                       <ArrowRight size={14} />
                     </a>
                   </div>
