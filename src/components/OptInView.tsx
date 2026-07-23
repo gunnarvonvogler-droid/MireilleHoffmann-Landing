@@ -73,6 +73,8 @@ export default function OptInView({ audience, setScreen }: OptInViewProps) {
     localStorage.setItem('optins', JSON.stringify(current));
     localStorage.setItem('lastOptInName', formData.nombre);
 
+    window.fbq?.('track', 'Lead');
+
     setScreen(copy.thanksScreen);
   };
 

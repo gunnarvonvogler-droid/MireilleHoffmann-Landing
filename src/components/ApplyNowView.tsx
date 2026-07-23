@@ -45,7 +45,9 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
         date: new Date().toISOString(),
       });
       localStorage.setItem('applications', JSON.stringify(currentApplications));
-      
+
+      window.fbq?.('track', 'CompleteRegistration');
+
       setFormSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }

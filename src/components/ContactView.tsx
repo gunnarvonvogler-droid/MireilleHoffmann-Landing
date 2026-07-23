@@ -37,6 +37,8 @@ export default function ContactView() {
       });
       localStorage.setItem('contact_messages', JSON.stringify(currentMessages));
 
+      window.fbq?.('track', 'Lead');
+
       setSubmitted(true);
       setFormData({ nombre: '', email: '', mensaje: '' });
     }
