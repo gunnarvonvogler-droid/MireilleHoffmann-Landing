@@ -397,6 +397,27 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                     <div className="flex items-center gap-2 mb-3">
                       <Calendar size={16} className="text-secondary" />
                       <h5 className="font-sans text-[10px] uppercase tracking-widest font-bold text-secondary">
+                        Agenda tu Sesión Calificatoria
+                      </h5>
+                    </div>
+                    <p className="font-serif text-sm text-on-surface-variant leading-relaxed mb-4">
+                      No hace falta esperar los 3 días — podés agendar ahora mismo tu <strong className="text-primary font-bold">sesión calificatoria gratuita de 15 minutos</strong> con Mireille, en el horario que más te convenga.
+                    </p>
+                    <a
+                      href="https://cal.gvvops.com/mimi/sesion-calificatoria-gratuita-15-min"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full bg-primary hover:bg-primary/95 text-white font-sans text-xs uppercase tracking-widest font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-colors duration-300 shadow-md"
+                    >
+                      Agendar mi sesión de 15 minutos
+                      <ArrowRight size={14} />
+                    </a>
+                  </div>
+
+                  <div className="w-full bg-surface-container-low border border-surface-variant rounded-xl p-6 mb-10 text-left">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Calendar size={16} className="text-secondary" />
+                      <h5 className="font-sans text-[10px] uppercase tracking-widest font-bold text-secondary">
                         Taller Grupal Gratuito
                       </h5>
                     </div>
