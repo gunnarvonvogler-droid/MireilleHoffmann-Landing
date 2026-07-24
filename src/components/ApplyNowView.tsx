@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle, AlertCircle, FileText, Send, Calendar, ArrowRight, Instagram, Link2, Mail, Check } from 'lucide-react';
+import { sendLeadToFunnel } from '../lib/funnelWebhook';
 
 interface ApplyNowViewProps {
   selectedPlan: string;
@@ -45,6 +46,15 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
         date: new Date().toISOString(),
       });
       localStorage.setItem('applications', JSON.stringify(currentApplications));
+
+      sendLeadToFunnel({
+        form_type: 'apply',
+        source: 'apply',
+        nombre: formData.nombre,
+        telefono: formData.whatsapp,
+        email: formData.email,
+        detalle: `Plan: ${formData.planSeleccionado} | Rango vocal: ${formData.rangoVocal} | Experiencia: ${formData.experiencia} | Meta: ${formData.meta}`,
+      });
 
       window.fbq?.('track', 'CompleteRegistration');
 

@@ -63,11 +63,11 @@ export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) 
             <span>Descargar mi guía en PDF</span>
           </a>
 
-          {/* Announcement only — no download button, delivered day by day over WhatsApp */}
+          {/* Announcement only — no download button, delivered day by day over email */}
           <p className="font-serif text-sm text-on-surface-variant leading-relaxed mb-10 max-w-md">
             Además, en los próximos días te voy a acompañar con mi{' '}
             <strong className="text-primary font-semibold">Guía completa de 7 días: Fundamentos de la Técnica Vocal</strong>{' '}
-            — directo a tu WhatsApp, un ejercicio nuevo cada día.
+            — directo a tu correo, un ejercicio nuevo cada día.
           </p>
 
           {/* Soft offer */}

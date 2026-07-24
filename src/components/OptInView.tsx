@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { AlertCircle, ArrowRight, Sparkles } from 'lucide-react';
 import { Audience, ScreenType } from '../types';
+import { sendLeadToFunnel } from '../lib/funnelWebhook';
 
 interface OptInViewProps {
   audience: Audience;
@@ -72,6 +73,14 @@ export default function OptInView({ audience, setScreen }: OptInViewProps) {
     });
     localStorage.setItem('optins', JSON.stringify(current));
     localStorage.setItem('lastOptInName', formData.nombre);
+
+    sendLeadToFunnel({
+      form_type: 'optin',
+      source: `optin-${audience}`,
+      nombre: formData.nombre,
+      telefono: formData.whatsapp,
+      email: formData.email,
+    });
 
     window.fbq?.('track', 'Lead');
 

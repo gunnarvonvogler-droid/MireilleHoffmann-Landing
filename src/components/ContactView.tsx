@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Mail, MessageCircle, Send, CheckCircle2, AlertCircle, Instagram, Link2, Phone } from 'lucide-react';
+import { sendLeadToFunnel } from '../lib/funnelWebhook';
 
 export default function ContactView() {
   const [formData, setFormData] = useState({
@@ -36,6 +37,14 @@ export default function ContactView() {
         date: new Date().toISOString(),
       });
       localStorage.setItem('contact_messages', JSON.stringify(currentMessages));
+
+      sendLeadToFunnel({
+        form_type: 'contact',
+        source: 'contact',
+        nombre: formData.nombre,
+        email: formData.email,
+        detalle: formData.mensaje,
+      });
 
       window.fbq?.('track', 'Lead');
 
