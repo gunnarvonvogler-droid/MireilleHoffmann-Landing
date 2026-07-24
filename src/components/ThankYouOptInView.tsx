@@ -51,7 +51,7 @@ export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) 
           </h1>
 
           <p className="font-serif text-on-surface-variant text-base leading-relaxed mb-8 max-w-md">
-            Tu guía <strong className="text-primary font-bold">"{copy.pdfLabel}"</strong> ya está lista. Descárgala ahora mismo — también te la enviamos a tu WhatsApp en los próximos minutos.
+            Tu guía <strong className="text-primary font-bold">"{copy.pdfLabel}"</strong> ya está lista. Descárgala ahora mismo.
           </p>
 
           <a
