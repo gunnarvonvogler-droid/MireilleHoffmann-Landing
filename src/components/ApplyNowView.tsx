@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { CheckCircle, AlertCircle, FileText, Send, Calendar, ArrowRight, Instagram, Link2, Mail, Check } from 'lucide-react';
+import { CheckCircle, AlertCircle, Send, Calendar, ArrowRight, Instagram, Link2, Mail, Check } from 'lucide-react';
 import { sendLeadToFunnel } from '../lib/funnelWebhook';
 
 interface ApplyNowViewProps {
@@ -13,10 +13,13 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
     nombre: '',
     email: '',
     whatsapp: '',
-    rangoVocal: 'no-se',
-    experiencia: 'principiante',
+    tipoReto: 'cantante-profesional',
+    modalidad: 'online',
+    disposicionInversion: 'capital-disponible',
+    compromisoPractica: 'comprometido',
     meta: '',
     planSeleccionado: selectedPlan || 'Paquete 3 Meses ($250/10 sesiones)',
+    aceptaPuntualidad: false,
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -31,6 +34,7 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
     }
     if (!formData.whatsapp.trim()) newErrors.whatsapp = 'El número de WhatsApp es requerido';
     if (!formData.meta.trim()) newErrors.meta = 'Por favor dinos cuál es tu meta principal';
+    if (!formData.aceptaPuntualidad) newErrors.aceptaPuntualidad = 'Necesitamos que aceptes esta condición para agendar tu sesión';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -53,7 +57,7 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
         nombre: formData.nombre,
         telefono: formData.whatsapp,
         email: formData.email,
-        detalle: `Plan: ${formData.planSeleccionado} | Rango vocal: ${formData.rangoVocal} | Experiencia: ${formData.experiencia} | Meta: ${formData.meta}`,
+        detalle: `Plan: ${formData.planSeleccionado} | Tipo de reto: ${formData.tipoReto} | Modalidad: ${formData.modalidad} | Inversión: ${formData.disposicionInversion} | Compromiso práctica: ${formData.compromisoPractica} | Puntualidad aceptada: sí | Meta: ${formData.meta}`,
       });
 
       window.fbq?.('track', 'CompleteRegistration');
@@ -141,22 +145,6 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                         </div>
                       </div>
                     </div>
-
-                    <div className="mt-12 pt-8 border-t border-white/10 space-y-4">
-                      <div className="flex items-center gap-2 text-xs font-sans text-secondary font-bold tracking-widest uppercase">
-                        <FileText size={14} />
-                        <span>Tiempo estimado: 5 minutos</span>
-                      </div>
-                      <a
-                        href="https://forms.gle/rDJEutrADTURUQpj7"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="w-full mt-4 bg-secondary hover:bg-secondary/90 text-white font-sans text-xs uppercase tracking-widest font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors duration-300 shadow-md group"
-                      >
-                        Ir al Formulario Externo
-                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                      </a>
-                    </div>
                   </div>
 
                   {/* Right panel - actual interactive form */}
@@ -235,36 +223,36 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                         </div>
                       </div>
 
-                      {/* Vocal selection options */}
+                      {/* Qualification: reto vocal + modalidad */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="flex flex-col gap-1.5 items-start">
                           <label className="font-sans text-[11px] uppercase tracking-wider font-bold text-on-surface-variant">
-                            Rango o Registro Vocal
+                            Tu reto vocal principal
                           </label>
                           <select
-                            value={formData.rangoVocal}
-                            onChange={(e) => setFormData({ ...formData, rangoVocal: e.target.value })}
+                            value={formData.tipoReto}
+                            onChange={(e) => setFormData({ ...formData, tipoReto: e.target.value })}
                             className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 font-serif text-sm focus:outline-none focus:border-secondary transition-colors cursor-pointer"
                           >
-                            <option value="no-se">No lo sé aún / Por definir</option>
-                            <option value="soprano-tenor">Soprano / Tenor</option>
-                            <option value="mezzosoprano-baritono">Mezzosoprano / Barítono</option>
-                            <option value="contralto-bajo">Contralto / Bajo</option>
+                            <option value="cantante-profesional">Cantante profesional / en formación (dolor, fatiga o falta de alcance en agudos)</option>
+                            <option value="orador-coach">Profesional de la voz / orador / coach (me quedo sin aire o pierdo potencia al hablar)</option>
+                            <option value="principiante-motivado">Principiante con alta motivación (quiero aprender desde cero con bases científicas)</option>
+                            <option value="hobby">Hobby / curiosidad (solo quiero cantar mejor en mi tiempo libre)</option>
                           </select>
                         </div>
 
                         <div className="flex flex-col gap-1.5 items-start">
                           <label className="font-sans text-[11px] uppercase tracking-wider font-bold text-on-surface-variant">
-                            Nivel de Experiencia
+                            Modalidad de entrenamiento
                           </label>
                           <select
-                            value={formData.experiencia}
-                            onChange={(e) => setFormData({ ...formData, experiencia: e.target.value })}
+                            value={formData.modalidad}
+                            onChange={(e) => setFormData({ ...formData, modalidad: e.target.value })}
                             className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 font-serif text-sm focus:outline-none focus:border-secondary transition-colors cursor-pointer"
                           >
-                            <option value="principiante">Principiante (Canto en ducha/amateur)</option>
-                            <option value="intermedio">Intermedio (Conozco bases técnicas)</option>
-                            <option value="avanzado">Profesional / Cantante Activo</option>
+                            <option value="online">100% Online vía Zoom/Meet</option>
+                            <option value="presencial">Presencial en San Salvador (zona Escalón)</option>
+                            <option value="domicilio">A domicilio (recargo de $20 por sesión)</option>
                           </select>
                         </div>
                       </div>
@@ -284,6 +272,44 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                         </select>
                       </div>
 
+                      {/* Qualification: inversión + compromiso de práctica */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="flex flex-col gap-1.5 items-start">
+                          <label className="font-sans text-[11px] uppercase tracking-wider font-bold text-on-surface-variant">
+                            Disposición de inversión
+                          </label>
+                          <p className="font-serif text-xs text-on-surface-variant -mt-0.5 mb-0.5">
+                            Los programas son de 3 meses, con una inversión de $250 a $270. Para armarte la mejor propuesta, contanos tu situación:
+                          </p>
+                          <select
+                            value={formData.disposicionInversion}
+                            onChange={(e) => setFormData({ ...formData, disposicionInversion: e.target.value })}
+                            className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 font-serif text-sm focus:outline-none focus:border-secondary transition-colors cursor-pointer"
+                          >
+                            <option value="capital-disponible">Tengo el capital disponible para iniciar de inmediato</option>
+                            <option value="financiamiento-2-cuotas">Me interesa, pero necesitaría financiamiento en 2 cuotas</option>
+                            <option value="no-por-ahora">Por ahora no puedo hacer esa inversión — prefiero explorar opciones gratuitas primero</option>
+                          </select>
+                        </div>
+
+                        <div className="flex flex-col gap-1.5 items-start">
+                          <label className="font-sans text-[11px] uppercase tracking-wider font-bold text-on-surface-variant">
+                            Compromiso de práctica
+                          </label>
+                          <p className="font-serif text-xs text-on-surface-variant -mt-0.5 mb-0.5">
+                            El método pide 10-20 minutos de práctica autónoma en casa entre sesiones. ¿Cómo ves eso en tu semana?
+                          </p>
+                          <select
+                            value={formData.compromisoPractica}
+                            onChange={(e) => setFormData({ ...formData, compromisoPractica: e.target.value })}
+                            className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 font-serif text-sm focus:outline-none focus:border-secondary transition-colors cursor-pointer"
+                          >
+                            <option value="comprometido">Totalmente comprometido/a, le hago espacio seguro</option>
+                            <option value="no-seguro">No estoy seguro/a de tener ese tiempo todos los días</option>
+                          </select>
+                        </div>
+                      </div>
+
                       {/* Goals input */}
                       <div className="flex flex-col gap-1.5 items-start">
                         <label className="font-sans text-[11px] uppercase tracking-wider font-bold text-on-surface-variant">
@@ -301,6 +327,26 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                         {errors.meta && (
                           <span className="text-[10px] text-red-500 font-sans flex items-center gap-1 mt-1">
                             <AlertCircle size={10} /> {errors.meta}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Puntualidad acceptance */}
+                      <div className="flex flex-col gap-1.5 items-start">
+                        <label className="flex items-start gap-2.5 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={formData.aceptaPuntualidad}
+                            onChange={(e) => setFormData({ ...formData, aceptaPuntualidad: e.target.checked })}
+                            className="mt-1 w-4 h-4 accent-secondary cursor-pointer shrink-0"
+                          />
+                          <span className="font-serif text-sm text-on-surface-variant leading-relaxed">
+                            Sé que el cupo para la sesión de 15 minutos es limitado — me comprometo a llegar puntual (si no puedo conectarme a tiempo, entiendo que el espacio se libera para otra persona). *
+                          </span>
+                        </label>
+                        {errors.aceptaPuntualidad && (
+                          <span className="text-[10px] text-red-500 font-sans flex items-center gap-1 mt-1">
+                            <AlertCircle size={10} /> {errors.aceptaPuntualidad}
                           </span>
                         )}
                       </div>
@@ -339,11 +385,11 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                       <span className="text-on-surface-variant">Programa:</span>
                       <span className="font-bold text-primary text-right">{formData.planSeleccionado}</span>
 
-                      <span className="text-on-surface-variant">Registro Vocal:</span>
-                      <span className="font-bold text-primary text-right uppercase">{formData.rangoVocal}</span>
+                      <span className="text-on-surface-variant">Modalidad:</span>
+                      <span className="font-bold text-primary text-right capitalize">{formData.modalidad}</span>
 
-                      <span className="text-on-surface-variant">Experiencia:</span>
-                      <span className="font-bold text-primary text-right capitalize">{formData.experiencia}</span>
+                      <span className="text-on-surface-variant">Reto principal:</span>
+                      <span className="font-bold text-primary text-right capitalize">{formData.tipoReto.replace(/-/g, ' ')}</span>
                     </div>
                   </div>
 
