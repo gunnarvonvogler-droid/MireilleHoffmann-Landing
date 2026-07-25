@@ -29,9 +29,13 @@ const COPY: Record<Audience, AudienceCopy> = {
 export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) {
   const copy = COPY[audience];
   const [name, setName] = useState('');
+  const [expiryLabel, setExpiryLabel] = useState('');
 
   useEffect(() => {
     setName(localStorage.getItem('lastOptInName') || '');
+    const expiry = new Date();
+    expiry.setDate(expiry.getDate() + 7);
+    setExpiryLabel(expiry.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' }));
   }, []);
 
   return (
@@ -82,9 +86,14 @@ export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) 
               <span className="font-serif text-3xl font-bold text-secondary">$15</span>
               <span className="font-serif text-base text-on-surface-variant line-through">$30</span>
             </div>
-            <p className="font-serif text-sm text-on-surface-variant leading-relaxed mb-6">
+            <p className="font-serif text-sm text-on-surface-variant leading-relaxed mb-4">
               Una hora contigo en vivo para identificar exactamente dónde está tu voz hoy — sin compromiso de seguir después.
             </p>
+            {expiryLabel && (
+              <p className="font-sans text-[11px] uppercase tracking-widest font-bold text-secondary mb-6">
+                Precio de $15 válido por 7 días — hasta el {expiryLabel}
+              </p>
+            )}
             <a
               href={`https://wa.me/50366801471?text=${encodeURIComponent(copy.whatsappMessage)}`}
               target="_blank"

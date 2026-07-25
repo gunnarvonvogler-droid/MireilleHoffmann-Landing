@@ -93,7 +93,7 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
             transition={{ delay: 0.2 }}
             className="font-serif text-base text-on-surface-variant leading-relaxed"
           >
-            Para asegurar un alto rendimiento y atención verdaderamente personalizada, el ingreso al programa de entrenamiento es por selección. Completa el breve cuestionario a continuación y agendaremos tu entrevista calificatoria de 15 minutos.
+            Mireille trabaja personalmente con un máximo de <strong className="text-primary font-bold">10 alumnas y alumnos nuevos por mes</strong>, para poder dar seguimiento 1:1 real a cada quien — el ingreso al programa es por selección. Completa el breve cuestionario a continuación y agendaremos tu entrevista calificatoria de 15 minutos.
           </motion.p>
         </div>
 

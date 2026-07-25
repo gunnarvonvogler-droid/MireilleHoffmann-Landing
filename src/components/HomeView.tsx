@@ -733,7 +733,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
                 </span>
               </button>
               <p className="mt-4 text-primary-fixed-dim text-xs italic">
-                Cupos limitados para garantizar atención personalizada.
+                Máximo 10 alumnas y alumnos nuevos por mes, para garantizar atención 1:1 real.
               </p>
             </div>
           </div>
