@@ -443,6 +443,82 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section id="testimonios" className="py-20 md:py-32 bg-surface-container-low w-full">
+        <div className="max-w-7xl mx-auto px-6 md:px-16">
+          <div className="text-center mb-16 md:mb-20">
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-6">
+              Lo que dicen mis alumnas y alumnos
+            </h2>
+            <div className="flex items-center justify-center gap-2 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={20} className="fill-secondary stroke-none" />
+              ))}
+            </div>
+            <p className="font-serif text-lg text-on-surface-variant max-w-2xl mx-auto italic">
+              Calificación de 5/5, basada en experiencias reales de quienes ya trabajaron su voz conmigo.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {[
+              {
+                name: 'Yuri Frank',
+                quote:
+                  'Es una excelente profesional en técnica vocal. Su enseñanza va mucho más allá de aprender a cantar: se enfoca en el verdadero cuidado de la voz, con un seguimiento personalizado semana a semana.',
+              },
+              {
+                name: 'E., alumna en La Paz',
+                quote:
+                  'Aprendí muchísimo sobre la metodología CVT y mejoré mi técnica. Te impulsa a dar el 110% y a explorar lo que inicialmente desconoces — el resultado es un crecimiento personal y artístico real.',
+              },
+              {
+                name: 'Andrea',
+                quote:
+                  'Desde el inicio sus ejercicios y explicaciones fueron didácticos, se entendían súper bien y me ayudaron a mejorar muchísimo con el canto. Es súper paciente y siempre está de buen humor.',
+              },
+              {
+                name: 'Kaydian',
+                quote:
+                  'Aprendí tanto que le guardo un enorme respeto hasta el día de hoy. Cada clase fue un mundo de conocimientos sobre el canto y la magia que rodea al intérprete en los escenarios.',
+              },
+              {
+                name: 'VANE',
+                quote:
+                  'Mireille es una profesional muy dedicada al momento de enseñar, explica con mucha pasión y mi técnica ha mejorado un montón desde que tomé sus talleres.',
+              },
+              {
+                name: 'Xiomara',
+                quote:
+                  '¡La recomiendo sin dudarlo! Gracias a sus consejos, experiencia y profesionalismo, aprenderás a desarrollar tu técnica vocal.',
+              },
+              {
+                name: 'Dennis',
+                quote:
+                  'Su metodología es muy efectiva, las clases son agradables y dinámicas, logré buenos resultados en el tiempo que tomé las clases. Una persona muy amable, profesional y paciente.',
+              },
+            ].map((t) => (
+              <div
+                key={t.name}
+                className="bg-surface-container-lowest p-8 rounded-xl border border-surface-variant vocal-shadow flex flex-col items-start text-left"
+              >
+                <div className="flex items-center gap-1 mb-5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} className="fill-secondary stroke-none" />
+                  ))}
+                </div>
+                <p className="font-serif text-sm text-on-surface-variant leading-relaxed mb-6 flex-grow">
+                  "{t.quote}"
+                </p>
+                <p className="font-sans text-xs font-bold uppercase tracking-widest text-primary border-t border-outline-variant/10 pt-4 w-full">
+                  {t.name}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Pricing/Modalities Section */}
       <section id="precios" className="py-20 md:py-32 bg-surface w-full">
         <div className="max-w-7xl mx-auto px-6 md:px-16">
