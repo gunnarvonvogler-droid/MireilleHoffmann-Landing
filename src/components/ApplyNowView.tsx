@@ -18,7 +18,7 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
     disposicionInversion: 'capital-disponible',
     compromisoPractica: 'comprometido',
     meta: '',
-    planSeleccionado: selectedPlan || 'Paquete 3 Meses ($250/10 sesiones)',
+    planSeleccionado: selectedPlan || 'Paquete 3 Meses ($500/10 sesiones)',
     aceptaPuntualidad: false,
   });
 
@@ -267,8 +267,8 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                           onChange={(e) => setFormData({ ...formData, planSeleccionado: e.target.value })}
                           className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 font-serif text-sm focus:outline-none focus:border-secondary transition-colors cursor-pointer"
                         >
-                          <option value="Paquete 3 Meses ($250/10 sesiones)">Paquete 3 Meses ($250 / 10 sesiones)</option>
-                          <option value="Sesión Individual ($30/hora)">Sesión Individual ($30 / hora)</option>
+                          <option value="Paquete 3 Meses ($500/10 sesiones)">Paquete 3 Meses ($500 / 10 sesiones)</option>
+                          <option value="Sesión Individual ($55/hora)">Sesión Individual ($55 / hora)</option>
                         </select>
                       </div>
 
@@ -279,7 +279,7 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                             Disposición de inversión
                           </label>
                           <p className="font-serif text-xs text-on-surface-variant -mt-0.5 mb-0.5">
-                            Los programas son de 3 meses, con una inversión de $250 a $270. Para armarte la mejor propuesta, contanos tu situación:
+                            Los programas son de 3 meses, con una inversión de $500. Para armarte la mejor propuesta, contanos tu situación:
                           </p>
                           <select
                             value={formData.disposicionInversion}

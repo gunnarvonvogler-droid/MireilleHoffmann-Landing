@@ -541,7 +541,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
                 Sesión Individual
               </h3>
               <div className="flex items-baseline gap-1 mb-8">
-                <span className="text-5xl font-bold text-primary font-serif">$30</span>
+                <span className="text-5xl font-bold text-primary font-serif">$55</span>
                 <span className="text-on-surface-variant font-serif text-sm">/ hora</span>
               </div>
 
@@ -567,7 +567,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
               </ul>
 
               <button
-                onClick={() => handleSelectPlan('Sesión Individual ($30/hora)')}
+                onClick={() => handleSelectPlan('Sesión Individual ($55/hora)')}
                 className="w-full py-4 border-2 border-primary text-primary font-sans text-xs font-bold rounded-xl hover:bg-primary hover:text-on-primary transition-all uppercase tracking-widest cursor-pointer"
               >
                 Seleccionar Plan
@@ -586,7 +586,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
                 Paquete 3 Meses
               </h3>
               <div className="flex items-baseline gap-1 mb-8">
-                <span className="text-5xl font-bold text-white font-serif">$250</span>
+                <span className="text-5xl font-bold text-white font-serif">$500</span>
                 <span className="text-primary-fixed-dim font-serif text-sm">/ 10 sesiones</span>
               </div>
 
@@ -618,7 +618,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
               </ul>
 
               <button
-                onClick={() => handleSelectPlan('Paquete 3 Meses ($250/10 sesiones)')}
+                onClick={() => handleSelectPlan('Paquete 3 Meses ($500/10 sesiones)')}
                 className="w-full py-4 bg-secondary text-white font-sans text-xs font-bold rounded-xl hover:bg-secondary/90 transition-all shadow-lg uppercase tracking-widest cursor-pointer"
               >
                 Comenzar Maestría
