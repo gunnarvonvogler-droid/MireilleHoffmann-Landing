@@ -50,10 +50,10 @@ export default function OptInView({ audience, setScreen }: OptInViewProps) {
   const validate = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.nombre.trim()) newErrors.nombre = 'Tu nombre es requerido';
-    if (!formData.whatsapp.trim() && !formData.email.trim()) {
-      newErrors.contacto = 'Déjanos tu WhatsApp o tu correo — al menos uno de los dos';
-    }
-    if (formData.email.trim() && !/\S+@\S+\.\S+/.test(formData.email)) {
+    // El correo es obligatorio: la secuencia de 7 días se entrega solo por email.
+    if (!formData.email.trim()) {
+      newErrors.email = 'Tu correo electrónico es requerido';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'El correo electrónico no es válido';
     }
     setErrors(newErrors);
@@ -176,29 +176,27 @@ export default function OptInView({ audience, setScreen }: OptInViewProps) {
 
             <div className="flex flex-col gap-1.5 items-start">
               <label className="font-sans text-[11px] uppercase tracking-wider font-bold text-on-surface-variant">
-                WhatsApp
+                WhatsApp <span className="normal-case tracking-normal font-normal">(opcional)</span>
               </label>
               <input
                 type="tel"
                 value={formData.whatsapp}
                 onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                className={`w-full bg-surface border rounded-xl px-4 py-3 font-serif text-sm focus:outline-none focus:border-secondary transition-colors ${
-                  errors.contacto ? 'border-red-400 focus:border-red-400' : 'border-outline-variant'
-                }`}
+                className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 font-serif text-sm focus:outline-none focus:border-secondary transition-colors"
                 placeholder="+503 7000 0000"
               />
             </div>
 
             <div className="flex flex-col gap-1.5 items-start">
               <label className="font-sans text-[11px] uppercase tracking-wider font-bold text-on-surface-variant">
-                Correo electrónico
+                Correo electrónico *
               </label>
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className={`w-full bg-surface border rounded-xl px-4 py-3 font-serif text-sm focus:outline-none focus:border-secondary transition-colors ${
-                  errors.contacto || errors.email ? 'border-red-400 focus:border-red-400' : 'border-outline-variant'
+                  errors.email ? 'border-red-400 focus:border-red-400' : 'border-outline-variant'
                 }`}
                 placeholder="tu@correo.com"
               />
@@ -207,14 +205,6 @@ export default function OptInView({ audience, setScreen }: OptInViewProps) {
                   <AlertCircle size={10} /> {errors.email}
                 </span>
               )}
-              {errors.contacto && (
-                <span className="text-[10px] text-red-500 font-sans flex items-center gap-1 mt-1">
-                  <AlertCircle size={10} /> {errors.contacto}
-                </span>
-              )}
-              <span className="text-[11px] text-on-surface-variant font-serif mt-0.5">
-                Déjanos al menos uno de los dos — ahí te enviamos la guía y tu acompañamiento de 7 días.
-              </span>
             </div>
 
             <button
