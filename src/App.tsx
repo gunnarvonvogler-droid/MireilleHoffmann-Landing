@@ -17,7 +17,9 @@ export default function App() {
   // Sync state with URL hash for a premium SPA experience
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash;
+      // Meta y otros redirectores pueden pegar parámetros al fragmento
+      // (#guia-cantantes?fbclid=…). Nos quedamos solo con la ruta.
+      const hash = '#' + window.location.hash.replace(/^#/, '').split(/[?&]/)[0];
       const hashToScreen: Record<string, ScreenType> = {
         '#apply': 'apply',
         '#contact': 'contact',
