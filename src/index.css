@@ -59,6 +59,12 @@ h1, h2, h3, h4, h5, h6, .font-display {
   box-shadow: 0 10px 40px rgba(34, 49, 77, 0.08);
 }
 
+/* Vaivén lento del marco punteado de la sección Estructura del Programa */
+@keyframes frame-drift {
+  0%, 100% { transform: rotate(-8deg); }
+  50%      { transform: rotate(2deg); }
+}
+
 /* Hide scrollbar but keep functionality */
 ::-webkit-scrollbar {
   width: 6px;

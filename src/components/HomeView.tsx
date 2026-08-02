@@ -424,13 +424,13 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
             {/* Right Anatomical illustration */}
             <div className="lg:col-span-5 hidden lg:flex items-center justify-center">
               <div className="relative w-full aspect-square max-w-md">
-                <div className="absolute inset-0 rounded-full border-2 border-dashed border-secondary/15 animate-[spin_40s_linear_infinite]"></div>
-                <div className="absolute inset-8 rounded-full border border-primary/10"></div>
+                <div className="absolute inset-0 rounded-[2.5rem] border-2 border-dashed border-secondary/15 animate-[frame-drift_12s_ease-in-out_infinite]"></div>
+                <div className="absolute inset-8 rounded-[2rem] border border-primary/10"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <img
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQlyvvjSoRmEb9xkElXlIhTjwfg4d-n_rIOvzkfJo8l6HecOiDeJBCia0Ai88lttY5vTOTiOZGKtr6L9XToz6FCFW67WbicB4BMoSNPzvsejYFzyNiBgyoy-9jYKkvtXTCbo3mg3SAxy2RlLKhVBY7HJwdmNwGPeJ0bJ3mU0F0PvSiXL__yDMruhkGUJzpye8KWZYMQBmJU9aFF5uKGDb4b__BInSWWd0zSarTOvUczUu99ZVvF8gPB1Ix0iOH2DYlaa1Y344X7pE"
                     alt="Anatomical vocal illustration"
-                    className="w-72 h-72 rounded-full object-cover vocal-shadow ring-[12px] ring-white"
+                    className="w-72 h-72 rounded-3xl object-cover vocal-shadow ring-[12px] ring-white"
                     referrerPolicy="no-referrer"
                   />
                 </div>
