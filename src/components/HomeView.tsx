@@ -87,7 +87,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
                 style={{ width: '357.046875px' }}
                 className="bg-secondary text-white px-8 py-4 rounded-xl font-sans text-xs font-bold uppercase tracking-widest hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl text-center cursor-pointer"
               >
-                Agenda tu entrevista calificadora de 15 minutos
+                Postula a tu entrevista calificadora de 15 minutos
               </button>
             </motion.div>
           </div>
@@ -727,7 +727,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
                 onClick={() => setScreen('apply')}
                 className="bg-secondary text-white px-8 py-4.5 rounded-xl font-sans text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-secondary/90 transition-all shadow-xl group cursor-pointer"
               >
-                Agenda tu Entrevista Calificatoria
+                Postula a tu Entrevista Calificatoria
                 <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
                   chat_bubble
                 </span>

@@ -279,7 +279,9 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                             Disposición de inversión
                           </label>
                           <p className="font-serif text-xs text-on-surface-variant -mt-0.5 mb-0.5">
-                            Los programas son de 3 meses, con una inversión de $500. Para armarte la mejor propuesta, contanos tu situación:
+                            {formData.planSeleccionado === 'Sesión Individual ($55/hora)'
+                              ? 'La sesión individual tiene una inversión de $55/hora. Para armarte la mejor propuesta, contanos tu situación:'
+                              : 'El programa completo es de 3 meses, con una inversión de $500. Para armarte la mejor propuesta, contanos tu situación:'}
                           </p>
                           <select
                             value={formData.disposicionInversion}
@@ -401,7 +403,7 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                       </h5>
                     </div>
                     <p className="font-serif text-sm text-on-surface-variant leading-relaxed mb-4">
-                      No hace falta esperar los 3 días — podés agendar ahora mismo tu <strong className="text-primary font-bold">sesión calificatoria gratuita de 15 minutos</strong> con Mireille, en el horario que más te convenga.
+                      No hace falta esperar — podés agendar ahora mismo tu <strong className="text-primary font-bold">sesión calificatoria gratuita de 15 minutos</strong> con Mireille, en el horario que más te convenga.
                     </p>
                     <a
                       href="https://cal.gvvops.com/mimi/sesion-calificatoria-gratuita-15-min"
