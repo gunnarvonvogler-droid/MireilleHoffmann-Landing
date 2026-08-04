@@ -14,22 +14,27 @@ export interface FunnelLeadPayload {
 export function sendLeadToFunnel(payload: FunnelLeadPayload): void {
   const body = JSON.stringify({ ...payload, token: FUNNEL_WEBHOOK_TOKEN });
 
-  // sendBeacon sobrevive al cambio de hash que ocurre justo después de esta llamada
-  // (setScreen navega a la thank-you page en el mismo tick) — un fetch() normal puede
-  // quedar cancelado por el navegador en ese instante, sobre todo en WebKit/in-app browsers.
-  const queued = navigator.sendBeacon?.(
-    FUNNEL_WEBHOOK_URL,
-    new Blob([body], { type: 'application/json' })
-  );
+  const porBeacon = () => {
+    navigator.sendBeacon?.(FUNNEL_WEBHOOK_URL, new Blob([body], { type: 'application/json' }));
+  };
 
-  if (!queued) {
+  // `keepalive: true` hace que la petición sobreviva al cambio de hash que ocurre justo
+  // después de esta llamada (setScreen navega a la thank-you page en el mismo tick) —
+  // ese era el motivo original de haber pasado a sendBeacon el 2026-08-02.
+  //
+  // sendBeacon NO sirve como método primario y por eso volvió a ser solo respaldo:
+  // verificado el 2026-08-04 contra el webhook real desde la página de producción, con el
+  // mismo payload y en el mismo tick, `fetch` con keepalive llega y sendBeacon no llega
+  // nunca — y encima devuelve `true`, así que un `if (!queued)` jamás dispara el respaldo.
+  // Entre el 2026-08-02 y el 2026-08-04 eso dejó al funnel sin un solo lead con 877 visitas.
+  try {
     fetch(FUNNEL_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body,
       keepalive: true,
-    }).catch(() => {
-      // Sin conexión al CRM — el lead ya tiene el fallback de WhatsApp visible en la UI.
-    });
+    }).catch(porBeacon);
+  } catch {
+    porBeacon();
   }
 }
