@@ -9,29 +9,35 @@ import { ScreenType } from './types';
 import { ArrowUp, Sparkles, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
+const hashToScreen: Record<string, ScreenType> = {
+  '#apply': 'apply',
+  '#contact': 'contact',
+  '#guia-cantantes': 'optin-cantantes',
+  '#guia-oradores': 'optin-oradores',
+  '#gracias-cantantes': 'gracias-cantantes',
+  '#gracias-oradores': 'gracias-oradores',
+};
+
+const screenFromHash = (): ScreenType => {
+  // Meta y otros redirectores pueden pegar parámetros al fragmento
+  // (#guia-cantantes?fbclid=…). Nos quedamos solo con la ruta.
+  const hash = '#' + window.location.hash.replace(/^#/, '').split(/[?&]/)[0];
+  return hashToScreen[hash] || 'home';
+};
+
 export default function App() {
-  const [screen, setScreen] = useState<ScreenType>('home');
+  // El hash se lee al inicializar el estado, no en un efecto posterior. Si no,
+  // en una carga directa (#guia-oradores) se monta primero 'home' con opacity 0
+  // y el efecto lo cambia al instante: AnimatePresence (mode="wait") encadena la
+  // salida de 'home' y la entrada de la pantalla real, ~0.8s en blanco antes de
+  // ver nada. Con el estado ya correcto en el primer render, es una sola entrada.
+  const [screen, setScreen] = useState<ScreenType>(screenFromHash);
   const [selectedPlan, setSelectedPlan] = useState<string>('');
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Sync state with URL hash for a premium SPA experience
   useEffect(() => {
-    const handleHashChange = () => {
-      // Meta y otros redirectores pueden pegar parámetros al fragmento
-      // (#guia-cantantes?fbclid=…). Nos quedamos solo con la ruta.
-      const hash = '#' + window.location.hash.replace(/^#/, '').split(/[?&]/)[0];
-      const hashToScreen: Record<string, ScreenType> = {
-        '#apply': 'apply',
-        '#contact': 'contact',
-        '#guia-cantantes': 'optin-cantantes',
-        '#guia-oradores': 'optin-oradores',
-        '#gracias-cantantes': 'gracias-cantantes',
-        '#gracias-oradores': 'gracias-oradores',
-      };
-      setScreen(hashToScreen[hash] || 'home');
-    };
-
-    handleHashChange(); // Run on initial load
+    const handleHashChange = () => setScreen(screenFromHash());
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
