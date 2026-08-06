@@ -214,6 +214,14 @@ export default function OptInView({ audience, setScreen }: OptInViewProps) {
               <span>{copy.ctaLabel}</span>
               <ArrowRight size={14} />
             </button>
+
+            <p className="font-serif text-[11px] text-on-surface-variant leading-relaxed text-center">
+              Al enviar aceptás nuestra{' '}
+              <a href="#privacidad" className="underline underline-offset-2 hover:text-secondary transition-colors">
+                política de privacidad
+              </a>
+              . Podés darte de baja cuando quieras.
+            </p>
           </form>
         </motion.div>
       </div>

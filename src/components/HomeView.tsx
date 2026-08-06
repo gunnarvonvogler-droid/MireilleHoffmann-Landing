@@ -743,8 +743,8 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
               <a href="#" className="hover:text-secondary transition-colors">
                 Terms of Service
               </a>
-              <a href="#" className="hover:text-secondary transition-colors">
-                Privacy Policy
+              <a href="#privacidad" className="hover:text-secondary transition-colors">
+                Política de privacidad
               </a>
               <a href="#" className="hover:text-secondary transition-colors">
                 Contact Support

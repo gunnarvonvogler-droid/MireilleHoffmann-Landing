@@ -5,6 +5,7 @@ import ApplyNowView from './components/ApplyNowView';
 import ContactView from './components/ContactView';
 import OptInView from './components/OptInView';
 import ThankYouOptInView from './components/ThankYouOptInView';
+import PrivacyView from './components/PrivacyView';
 import { ScreenType } from './types';
 import { ArrowUp, Sparkles, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -16,6 +17,7 @@ const hashToScreen: Record<string, ScreenType> = {
   '#guia-oradores': 'optin-oradores',
   '#gracias-cantantes': 'gracias-cantantes',
   '#gracias-oradores': 'gracias-oradores',
+  '#privacidad': 'privacidad',
 };
 
 const screenFromHash = (): ScreenType => {
@@ -52,6 +54,7 @@ export default function App() {
       'optin-oradores': '#guia-oradores',
       'gracias-cantantes': '#gracias-cantantes',
       'gracias-oradores': '#gracias-oradores',
+      privacidad: '#privacidad',
     };
     if (newScreen === 'home') {
       window.history.pushState(null, '', ' ');
@@ -119,6 +122,9 @@ export default function App() {
             )}
             {screen === 'gracias-oradores' && (
               <ThankYouOptInView audience="oradores" />
+            )}
+            {screen === 'privacidad' && (
+              <PrivacyView />
             )}
           </motion.div>
         </AnimatePresence>
