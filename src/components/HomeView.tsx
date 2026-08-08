@@ -740,14 +740,11 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex flex-wrap gap-6 md:gap-8 justify-center text-xs font-sans text-primary-fixed-dim tracking-wider uppercase font-semibold">
-              <a href="#" className="hover:text-secondary transition-colors">
-                Terms of Service
-              </a>
               <a href="#privacidad" className="hover:text-secondary transition-colors">
                 Política de privacidad
               </a>
-              <a href="#" className="hover:text-secondary transition-colors">
-                Contact Support
+              <a href="#contact" className="hover:text-secondary transition-colors">
+                Contacto
               </a>
             </div>
             <div className="text-primary-fixed-dim text-xs opacity-60 font-sans">
