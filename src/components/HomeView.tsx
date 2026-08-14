@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Check, Star, ChevronDown, Award, Sparkles, Brain, ArrowUpRight, HelpCircle, Music } from 'lucide-react';
+import { Check, Star, ChevronDown, Award, Sparkles, Brain, ArrowUpRight, HelpCircle, Music, CalendarDays, Clock, Video } from 'lucide-react';
 import { ScreenType } from '../types';
+import { TALLER_INSCRIPCION_URL } from '../lib/taller';
 
 interface HomeViewProps {
   setScreen: (screen: ScreenType) => void;
@@ -516,6 +517,53 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Taller semanal gratuito — la puerta de menor fricción del funnel.
+          El formulario lo sirve n8n (workflow `Taller - Inscripción Pública`), no este sitio. */}
+      <section id="taller" className="py-20 md:py-28 bg-primary text-white w-full">
+        <div className="max-w-5xl mx-auto px-6 md:px-16 flex flex-col items-center text-center">
+          <span className="inline-block px-4 py-1.5 rounded-full border border-secondary text-secondary font-sans text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
+            Gratis · Todos los miércoles
+          </span>
+
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
+            Taller de técnica vocal en vivo
+          </h2>
+
+          <p className="font-serif text-lg text-white/80 max-w-2xl leading-relaxed mb-10">
+            Ejercicios prácticos conmigo, en directo. No es una charla para escuchar: trabajas tu propia voz y sientes la diferencia en el momento. Al final dejo tiempo para tus preguntas.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 mb-10 font-sans text-[11px] uppercase tracking-widest font-bold text-white/70">
+            <span className="flex items-center gap-2">
+              <CalendarDays size={14} className="text-secondary" />
+              Miércoles 19:00 (El Salvador)
+            </span>
+            <span className="flex items-center gap-2">
+              <Clock size={14} className="text-secondary" />
+              45 minutos
+            </span>
+            <span className="flex items-center gap-2">
+              <Video size={14} className="text-secondary" />
+              Por Google Meet
+            </span>
+          </div>
+
+          <a
+            href={TALLER_INSCRIPCION_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-secondary text-white px-10 py-4 rounded-xl font-sans text-xs font-bold uppercase tracking-widest hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2.5 cursor-pointer"
+          >
+            <span>Reservar mi lugar</span>
+            <ArrowUpRight size={14} />
+          </a>
+
+          <p className="font-serif text-sm text-white/60 mt-6">
+            Te llega la confirmación con el enlace directo a tu correo.
+          </p>
         </div>
       </section>
 
