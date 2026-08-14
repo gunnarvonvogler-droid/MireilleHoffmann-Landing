@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { CheckCircle, Download, ArrowUpRight } from 'lucide-react';
+import { CheckCircle, Download } from 'lucide-react';
 import { Audience } from '../types';
-import { TALLER_INSCRIPCION_URL } from '../lib/taller';
+import TallerSignup from './TallerSignup';
 
 interface ThankYouOptInViewProps {
   audience: Audience;
@@ -78,15 +78,7 @@ export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) 
               <strong className="text-primary font-semibold">taller gratuito de 45 minutos</strong>{' '}
               todos los miércoles a las 19:00 (hora de El Salvador). Ejercicios prácticos, por Google Meet.
             </p>
-            <a
-              href={TALLER_INSCRIPCION_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto border border-primary text-primary hover:bg-surface-container font-sans text-xs uppercase tracking-widest font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-2.5 transition-colors cursor-pointer"
-            >
-              <span>Reservar mi lugar en el taller</span>
-              <ArrowUpRight size={14} />
-            </a>
+            <TallerSignup variante="claro" ctaLabel="Reservar mi lugar en el taller" />
           </div>
         </motion.div>
       </div>

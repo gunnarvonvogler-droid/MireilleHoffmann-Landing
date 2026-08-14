@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Check, Star, ChevronDown, Award, Sparkles, Brain, ArrowUpRight, HelpCircle, Music, CalendarDays, Clock, Video } from 'lucide-react';
 import { ScreenType } from '../types';
-import { TALLER_INSCRIPCION_URL } from '../lib/taller';
+import TallerSignup from './TallerSignup';
 
 interface HomeViewProps {
   setScreen: (screen: ScreenType) => void;
@@ -551,19 +551,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
             </span>
           </div>
 
-          <a
-            href={TALLER_INSCRIPCION_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-secondary text-white px-10 py-4 rounded-xl font-sans text-xs font-bold uppercase tracking-widest hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2.5 cursor-pointer"
-          >
-            <span>Reservar mi lugar</span>
-            <ArrowUpRight size={14} />
-          </a>
-
-          <p className="font-serif text-sm text-white/60 mt-6">
-            Te llega la confirmación con el enlace directo a tu correo.
-          </p>
+          <TallerSignup variante="oscuro" />
         </div>
       </section>
 
