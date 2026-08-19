@@ -19,8 +19,11 @@ const COPY: Record<Audience, AudienceCopy> = {
     pdfLabel: 'Los 3 minutos antes de cantar',
   },
   oradores: {
-    pdfFile: '/lead-magnets/Rutina_Anti_Fatiga_Vocal_Oradores.pdf',
-    pdfLabel: 'Cómo terminar el día sin quedarte sin voz',
+    // 2026-08-18: reemplaza a Rutina_Anti_Fatiga_Vocal_Oradores.pdf. El lead magnet de
+    // Oradores pasa a ser el programa de 7 dias, y el correo 1 entrega esta misma hoja:
+    // si aca se sigue dando el PDF viejo, la persona recibe dos guias distintas.
+    pdfFile: '/lead-magnets/Volumen-y-Matices-00-Empezar-aca.pdf',
+    pdfLabel: 'Empezá acá — tu guía de 7 días',
   },
 };
 
