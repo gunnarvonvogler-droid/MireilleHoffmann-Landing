@@ -14,9 +14,12 @@ interface AudienceCopy {
 }
 
 const COPY: Record<Audience, AudienceCopy> = {
+  // 2026-08-20: reemplaza a Rutina_Antes_de_Cantar.pdf, que prometia un calentamiento
+  // generico y no mencionaba los agudos en ningun lado — justo el tema por el que la
+  // persona hizo clic. El PDF viejo se deja en public/lead-magnets/ por si se necesita.
   cantantes: {
-    pdfFile: '/lead-magnets/Rutina_Antes_de_Cantar.pdf',
-    pdfLabel: 'Los 3 minutos antes de cantar',
+    pdfFile: '/lead-magnets/Un-Agudo-No-Tiene-Que-Doler.pdf',
+    pdfLabel: 'Un agudo no tiene que doler',
   },
   oradores: {
     // 2026-08-18: reemplaza a Rutina_Anti_Fatiga_Vocal_Oradores.pdf. El lead magnet de

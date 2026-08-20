@@ -20,13 +20,17 @@ interface AudienceCopy {
 }
 
 const COPY: Record<Audience, AudienceCopy> = {
+  // 2026-08-20: el copy pasa del calentamiento generico a los agudos. Motivo: el reel
+  // "Un agudo no tiene que doler" es la unica pieza que Meta distribuye sola a desconocidos,
+  // y mandaba a una pagina que prometia otra cosa. La promesa del anuncio y la de la pagina
+  // ahora son la misma frase. Ver "Rendimiento del Contenido Publicado" en el vault.
   cantantes: {
     eyebrow: 'Para cantantes',
-    headline: 'Cómo dejar tu voz lista en 3 minutos antes de subir al escenario',
+    headline: 'Un agudo no tiene que doler',
     subheadline:
-      'Una boda, un evento en la iglesia, un karaoke serio — donde sea que te toque cantar hoy. Descarga la rutina que uso con mis alumnos.',
-    leadMagnetTitle: 'Los 3 minutos antes de cantar',
-    steps: ['Despertar el apoyo', 'Limpiar el ataque', 'Encontrar el brillo'],
+      'Si al subir sentís que algo se aprieta, que raspa, que tenés que empujar desde la garganta — no te falta voz. Estás empujando desde donde no hay que empujar. Te mando los 3 ejercicios que lo cambian, con un video para cada uno.',
+    leadMagnetTitle: 'Un agudo no tiene que doler',
+    steps: ['Medir cuánto forzás', 'Aflojar la garganta', 'Subir la resonancia'],
     ctaLabel: 'Quiero mi guía gratis',
     thanksScreen: 'gracias-cantantes',
   },
