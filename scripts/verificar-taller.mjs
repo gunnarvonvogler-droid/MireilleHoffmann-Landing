@@ -21,7 +21,7 @@
 
 import { chromium } from 'playwright';
 
-const BASE = 'http://localhost:3000';
+const BASE = process.env.BASE || 'http://localhost:3000';
 const RESP = {
   ok: true, estado: 'listo', email: 'rosy@correo.com',
   fecha: 'miércoles 26 de agosto',
