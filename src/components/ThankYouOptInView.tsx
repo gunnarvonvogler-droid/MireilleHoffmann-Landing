@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { CheckCircle, Download } from 'lucide-react';
 import { Audience } from '../types';
 import TallerSignup from './TallerSignup';
+import { OptInRecordado, nombreRecordado, optInReciente } from '../lib/optinMemoria';
 
 interface ThankYouOptInViewProps {
   audience: Audience;
@@ -32,10 +33,19 @@ const COPY: Record<Audience, AudienceCopy> = {
 
 export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) {
   const copy = COPY[audience];
-  const [name, setName] = useState('');
+  // Se lee ya en el primer render (inicializador perezoso) para que no haya un parpadeo
+  // entre el formulario y el boton de un clic. Los dos helpers atrapan cualquier fallo
+  // de `localStorage`, asi que esto no puede tumbar la pagina.
+  // `null` significa "pedile los datos": no hay opt-in reciente, o no son de fiar
+  // (viejos, corruptos, o el navegador no deja leer) — el caso del link directo.
+  const [name, setName] = useState(() => nombreRecordado());
+  const [prefill, setPrefill] = useState<OptInRecordado | null>(() => optInReciente());
 
+  // Segunda lectura tras montar, por si el inicializador corrio antes de que el
+  // navegador tuviera el dato disponible. Es idempotente.
   useEffect(() => {
-    setName(localStorage.getItem('lastOptInName') || '');
+    setName(nombreRecordado());
+    setPrefill(optInReciente());
   }, []);
 
   return (
@@ -84,7 +94,7 @@ export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) 
               <strong className="text-primary font-semibold">taller gratuito de 45 minutos</strong>{' '}
               todos los miércoles a las 19:00 (hora de El Salvador). Ejercicios prácticos, por Google Meet.
             </p>
-            <TallerSignup variante="claro" ctaLabel="Reservar mi lugar en el taller" />
+            <TallerSignup variante="claro" ctaLabel="Reservar mi lugar en el taller" prefill={prefill} />
           </div>
         </motion.div>
       </div>

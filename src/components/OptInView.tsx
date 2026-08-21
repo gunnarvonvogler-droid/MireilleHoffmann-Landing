@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { AlertCircle, ArrowRight, Sparkles } from 'lucide-react';
 import { Audience, ScreenType } from '../types';
 import { sendLeadToFunnel } from '../lib/funnelWebhook';
+import { recordarOptIn } from '../lib/optinMemoria';
 
 interface OptInViewProps {
   audience: Audience;
@@ -68,15 +69,25 @@ export default function OptInView({ audience, setScreen }: OptInViewProps) {
     e.preventDefault();
     if (!validate()) return;
 
-    const current = JSON.parse(localStorage.getItem('optins') || '[]');
-    current.push({
-      ...formData,
-      audience,
-      id: Date.now(),
-      date: new Date().toISOString(),
-    });
-    localStorage.setItem('optins', JSON.stringify(current));
-    localStorage.setItem('lastOptInName', formData.nombre);
+    // El almacenamiento del navegador es un extra, no parte de la cadena crítica.
+    // En navegación privada de Safari `localStorage` lanza excepción, y sin este
+    // try/catch el error cortaba el envío del lead y la navegación a la thank-you page:
+    // la persona se quedaba mirando el formulario y el contacto no llegaba a nadie.
+    try {
+      const current = JSON.parse(localStorage.getItem('optins') || '[]');
+      current.push({
+        ...formData,
+        audience,
+        id: Date.now(),
+        date: new Date().toISOString(),
+      });
+      localStorage.setItem('optins', JSON.stringify(current));
+    } catch {
+      /* Sin historial local. El lead igual sale al CRM, que es lo que cuenta. */
+    }
+    // Nombre + correo + marca de tiempo: es lo que le permite a la thank-you page
+    // ofrecer la inscripción al taller de un solo clic, sin volver a pedir nada.
+    recordarOptIn(formData.nombre.trim(), formData.email.trim());
 
     sendLeadToFunnel({
       form_type: 'optin',
