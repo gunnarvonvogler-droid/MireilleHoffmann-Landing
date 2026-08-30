@@ -65,7 +65,8 @@ export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) 
           </h1>
 
           <p className="font-serif text-on-surface-variant text-base leading-relaxed mb-8 max-w-md">
-            Tu guía <strong className="text-primary font-bold">"{copy.pdfLabel}"</strong> ya está lista. Descárgala ahora mismo.
+            Tu guía <strong className="text-primary font-bold">"{copy.pdfLabel}"</strong> ya está lista. Descárgala ahora mismo{' '}
+            — y te la mando también por correo, con los videos de cada ejercicio, para que no se te pierda.
           </p>
 
           <a
@@ -79,9 +80,12 @@ export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) 
 
           {/* Announcement only — no download button, delivered day by day over email */}
           <p className="font-serif text-sm text-on-surface-variant leading-relaxed max-w-md">
-            Además, en los próximos días te voy a acompañar con mi{' '}
+            Y a partir de mañana te acompaño con mi{' '}
             <strong className="text-primary font-semibold">Guía completa de 7 días: Fundamentos de la Técnica Vocal</strong>{' '}
-            — directo a tu correo, un ejercicio nuevo cada día. Al final de la semana tengo algo especial para vos.
+            — un ejercicio nuevo cada día, directo a tu correo.{' '}
+            {audience === 'cantantes'
+              ? 'Es la base de aire sobre la que se apoyan los tres ejercicios de tu guía: esta semana la base, la siguiente tus agudos.'
+              : 'Al final de la semana tengo algo especial para vos.'}
           </p>
 
           {/* Taller semanal: el paso siguiente natural en el momento de mayor interés */}
