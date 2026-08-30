@@ -78,15 +78,25 @@ export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) 
             <span>Descargar mi guía en PDF</span>
           </a>
 
-          {/* Announcement only — no download button, delivered day by day over email */}
-          <p className="font-serif text-sm text-on-surface-variant leading-relaxed max-w-md">
-            Y a partir de mañana te acompaño con mi{' '}
-            <strong className="text-primary font-semibold">Guía completa de 7 días: Fundamentos de la Técnica Vocal</strong>{' '}
-            — un ejercicio nuevo cada día, directo a tu correo.{' '}
-            {audience === 'cantantes'
-              ? 'Es la base de aire sobre la que se apoyan los tres ejercicios de tu guía: esta semana la base, la siguiente tus agudos.'
-              : 'Al final de la semana tengo algo especial para vos.'}
-          </p>
+          {/* Announcement only — no download button, delivered day by day over email.
+              2026-08-30: audience-aware. Antes anunciaba a TODO EL MUNDO la guia de
+              Fundamentos, que es la de cantantes — un orador leia el nombre de un programa
+              que no iba a recibir, porque su nurture (Fase 4b) entrega Volumen y Matices. */}
+          {audience === 'cantantes' ? (
+            <p className="font-serif text-sm text-on-surface-variant leading-relaxed max-w-md">
+              Y a partir de mañana te acompaño con mi{' '}
+              <strong className="text-primary font-semibold">Guía completa de 7 días: Fundamentos de la Técnica Vocal</strong>{' '}
+              — un ejercicio nuevo cada día, directo a tu correo. Es la base de aire sobre la que se apoyan
+              los tres ejercicios de tu guía: esta semana la base, la siguiente tus agudos.
+            </p>
+          ) : (
+            <p className="font-serif text-sm text-on-surface-variant leading-relaxed max-w-md">
+              Y a partir de mañana arranca la semana:{' '}
+              <strong className="text-primary font-semibold">un ejercicio nuevo cada día, con su video</strong>{' '}
+              — directo a tu correo. La hoja que acabás de bajar es el Día 0: elegí tu frase antes de
+              empezar, porque el séptimo día volvés a la misma y escuchás la diferencia.
+            </p>
+          )}
 
           {/* Taller semanal: el paso siguiente natural en el momento de mayor interés */}
           <div className="w-full border-t border-outline-variant/20 mt-10 pt-8 flex flex-col items-center">

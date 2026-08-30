@@ -35,14 +35,19 @@ const COPY: Record<Audience, AudienceCopy> = {
     ctaLabel: 'Quiero mi guía gratis',
     thanksScreen: 'gracias-cantantes',
   },
+  // 2026-08-30: el copy pasa de la rutina antifatiga al programa de 7 dias. Motivo: el iman
+  // se reemplazo el 18/08 y se actualizo la entrega pero NO esta pagina, asi que los videos
+  // prometian "programa de 7 dias para mas volumen", la pagina ofrecia "3 pasos para no
+  // quedarte sin voz", y la entrega volvia a ser el programa de 7 dias. Es la misma averia
+  // que costo del 11 al 20 de agosto en cantantes. Ver "Rendimiento del Contenido Publicado".
   oradores: {
     eyebrow: 'Para oradores, docentes y conferencistas',
-    headline: 'Cómo terminar el día sin quedarte sin voz, en 3 pasos simples',
+    headline: 'Más volumen y más matices en tu voz, en 7 días',
     subheadline:
-      'Clases, charlas, presentaciones largas — cualquiera que hable muchas horas seguidas conoce ese cansancio. Esta rutina protege tu voz durante todo el día.',
-    leadMagnetTitle: 'Cómo terminar el día sin quedarte sin voz',
-    steps: ['Apoyo eficiente', 'Cero fugas de aire', 'Proyección sin forzar'],
-    ctaLabel: 'Quiero mi guía gratis',
+      'Clases, charlas, presentaciones largas. Si al final del día te quedás sin voz, no es que hables demasiado: es que estás sacando el volumen de la garganta, que es el único sitio de donde no sale. Siete días, diez minutos por día, un ejercicio y un video cada mañana.',
+    leadMagnetTitle: 'Más volumen y más matices en tu voz',
+    steps: ['Sostener la frase entera', 'De la barriga a la cabeza', 'Las vocales que cortan el ruido'],
+    ctaLabel: 'Quiero mi programa gratis',
     thanksScreen: 'gracias-oradores',
   },
 };
