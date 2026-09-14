@@ -64,7 +64,9 @@ const INCLUYE: { titulo: string; texto: string }[] = [
 
 function BotonCompra({ label = 'Empezar mis 21 días — $37', claro = false }: { label?: string; claro?: boolean }) {
   const handleClick = () => {
-    window.fbq?.('track', 'InitiateCheckout', { value: 37, currency: 'USD', content_name: 'Tu agudo en 21 días' });
+    // InitiateCheckout lo manda el píxel configurado en Hotmart al cargar su página de pago.
+    // Si también saliera de acá, Meta contaría cada intento dos veces: el clic va con nombre propio.
+    window.fbq?.('trackCustom', 'ClicBotonCompra', { value: 37, currency: 'USD', content_name: 'Tu agudo en 21 días' });
   };
   return (
     <div className="flex flex-col items-center gap-3">
