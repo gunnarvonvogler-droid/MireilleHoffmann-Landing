@@ -6,6 +6,7 @@ import ContactView from './components/ContactView';
 import OptInView from './components/OptInView';
 import ThankYouOptInView from './components/ThankYouOptInView';
 import PrivacyView from './components/PrivacyView';
+import SalesPageView from './components/SalesPageView';
 import { ScreenType } from './types';
 import { ArrowUp, Sparkles, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -18,6 +19,7 @@ const hashToScreen: Record<string, ScreenType> = {
   '#gracias-cantantes': 'gracias-cantantes',
   '#gracias-oradores': 'gracias-oradores',
   '#privacidad': 'privacidad',
+  '#tu-agudo-en-21-dias': 'venta-agudos',
 };
 
 const screenFromHash = (): ScreenType => {
@@ -44,6 +46,12 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  // Una pantalla nueva siempre arranca arriba, también cuando se llega por un enlace
+  // con hash (el bloque de oferta de la página de gracias lleva a la de venta).
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [screen]);
+
   const handleScreenChange = (newScreen: ScreenType) => {
     setScreen(newScreen);
     // Update hash gracefully
@@ -55,6 +63,7 @@ export default function App() {
       'gracias-cantantes': '#gracias-cantantes',
       'gracias-oradores': '#gracias-oradores',
       privacidad: '#privacidad',
+      'venta-agudos': '#tu-agudo-en-21-dias',
     };
     if (newScreen === 'home') {
       window.history.pushState(null, '', ' ');
@@ -125,6 +134,9 @@ export default function App() {
             )}
             {screen === 'privacidad' && (
               <PrivacyView />
+            )}
+            {screen === 'venta-agudos' && (
+              <SalesPageView />
             )}
           </motion.div>
         </AnimatePresence>

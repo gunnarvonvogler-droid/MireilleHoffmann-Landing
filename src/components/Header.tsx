@@ -142,23 +142,35 @@ export default function Header({ currentScreen, setScreen }: HeaderProps) {
               >
                 Filosofía
               </button>
-              <span className="font-sans text-xs uppercase tracking-widest font-bold text-secondary border-b border-secondary pb-0.5 select-none">
-                Contacto
-              </span>
+              {currentScreen === 'contact' ? (
+                <span className="font-sans text-xs uppercase tracking-widest font-bold text-secondary border-b border-secondary pb-0.5 select-none">
+                  Contacto
+                </span>
+              ) : (
+                <button
+                  onClick={() => setScreen('contact')}
+                  className="font-sans text-xs uppercase tracking-widest font-semibold text-on-surface-variant hover:text-secondary transition-colors duration-200 cursor-pointer"
+                >
+                  Contacto
+                </button>
+              )}
             </>
           )}
 
-          {/* Call to Action Button */}
-          <button
-            onClick={() => setScreen('apply')}
-            className={`font-sans text-xs uppercase tracking-widest font-bold px-6 py-2.5 rounded-xl transition-all duration-300 border ${
-              currentScreen === 'apply'
-                ? 'bg-transparent border-secondary text-secondary hover:bg-secondary/10'
-                : 'bg-primary border-primary text-white hover:bg-primary/90 hover:shadow-md'
-            }`}
-          >
-            Apply Now
-          </button>
+          {/* Call to Action Button — oculto en la página de venta de $37 (14/09): ahí sería
+              una salida hacia el programa de $500 en mitad de la compra. */}
+          {currentScreen !== 'venta-agudos' && (
+            <button
+              onClick={() => setScreen('apply')}
+              className={`font-sans text-xs uppercase tracking-widest font-bold px-6 py-2.5 rounded-xl transition-all duration-300 border ${
+                currentScreen === 'apply'
+                  ? 'bg-transparent border-secondary text-secondary hover:bg-secondary/10'
+                  : 'bg-primary border-primary text-white hover:bg-primary/90 hover:shadow-md'
+              }`}
+            >
+              Apply Now
+            </button>
+          )}
         </nav>
 
         {/* Mobile Menu Action */}
@@ -256,21 +268,35 @@ export default function Header({ currentScreen, setScreen }: HeaderProps) {
               >
                 Filosofía
               </button>
-              <span className="text-left font-sans text-sm uppercase tracking-widest font-bold text-secondary py-1">
-                Contacto
-              </span>
+              {currentScreen === 'contact' ? (
+                <span className="text-left font-sans text-sm uppercase tracking-widest font-bold text-secondary py-1">
+                  Contacto
+                </span>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setScreen('contact');
+                  }}
+                  className="text-left font-sans text-sm uppercase tracking-widest font-semibold text-on-surface-variant py-1"
+                >
+                  Contacto
+                </button>
+              )}
             </>
           )}
 
-          <button
-            onClick={() => {
-              setIsMobileMenuOpen(false);
-              setScreen('apply');
-            }}
-            className="w-full text-center bg-primary text-white font-sans text-xs uppercase tracking-widest font-bold py-3 rounded-xl hover:bg-primary/90 mt-2"
-          >
-            Apply Now
-          </button>
+          {currentScreen !== 'venta-agudos' && (
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setScreen('apply');
+              }}
+              className="w-full text-center bg-primary text-white font-sans text-xs uppercase tracking-widest font-bold py-3 rounded-xl hover:bg-primary/90 mt-2"
+            >
+              Apply Now
+            </button>
+          )}
         </div>
       )}
     </header>

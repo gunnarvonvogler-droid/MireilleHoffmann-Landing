@@ -6,7 +6,8 @@ export type ScreenType =
   | 'optin-oradores'
   | 'gracias-cantantes'
   | 'gracias-oradores'
-  | 'privacidad';
+  | 'privacidad'
+  | 'venta-agudos';
 
 export type Audience = 'cantantes' | 'oradores';
 

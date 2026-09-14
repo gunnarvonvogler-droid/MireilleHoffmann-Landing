@@ -98,6 +98,27 @@ export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) 
             </p>
           )}
 
+          {/* 2026-09-14: oferta del programa de $37, solo para cantantes (el producto es de agudos).
+              Es el momento de mayor interés: la persona acaba de pedir la guía gratis. */}
+          {audience === 'cantantes' && (
+            <div className="w-full mt-10 bg-surface-container-high border border-outline-variant/40 rounded-2xl p-6 md:p-8 flex flex-col items-center">
+              <p className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">
+                Cuando quieras ir más lejos
+              </p>
+              <p className="font-display text-2xl font-bold text-primary leading-tight mb-3">Tu agudo en 21 días</p>
+              <p className="font-serif text-base text-on-surface-variant leading-relaxed max-w-md mb-6">
+                Tres semanas, quince minutos por día, y tu propia voz corregida por mí por WhatsApp.{' '}
+                <strong className="text-primary font-semibold">$37, pago único</strong>, con 7 días de garantía.
+              </p>
+              <a
+                href="#tu-agudo-en-21-dias"
+                className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white font-sans text-xs uppercase tracking-widest font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-md"
+              >
+                <span>Ver el programa</span>
+              </a>
+            </div>
+          )}
+
           {/* Taller semanal: el paso siguiente natural en el momento de mayor interés */}
           <div className="w-full border-t border-outline-variant/20 mt-10 pt-8 flex flex-col items-center">
             <p className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">
