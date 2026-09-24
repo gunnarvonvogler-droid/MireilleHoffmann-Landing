@@ -1,0 +1,38 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Mireille Hoffmann//Taller Vocal//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Taller de técnica vocal
+X-WR-TIMEZONE:America/El_Salvador
+BEGIN:VTIMEZONE
+TZID:America/El_Salvador
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:-0600
+TZOFFSETTO:-0600
+TZNAME:CST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:taller-semanal@mireille-hoffmann.vercel.app
+DTSTAMP:20260924T200000Z
+DTSTART;TZID=America/El_Salvador:20260930T190000
+DTEND;TZID=America/El_Salvador:20260930T194500
+RRULE:FREQ=WEEKLY
+SUMMARY:Taller de técnica vocal con Mireille Hoffmann
+DESCRIPTION:Taller práctico de 45 minutos con Mireille Hoffmann\, todos lo
+ s miércoles.\n\nVas a cantar vos: son ejercicios en vivo\, no una charla 
+ para escuchar. Al final hay tiempo para tus preguntas.\n\nPara aprovecharl
+ o: un lugar donde puedas hacer ruido sin incomodar a nadie\, agua a mano\,
+  y si podés\, audífonos.\n\nEntrar al taller: https://meet.google.com/wj
+ t-cguv-niu
+LOCATION:https://meet.google.com/wjt-cguv-niu
+URL:https://meet.google.com/wjt-cguv-niu
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:El taller empieza en 30 minutos
+END:VALARM
+END:VEVENT
+END:VCALENDAR

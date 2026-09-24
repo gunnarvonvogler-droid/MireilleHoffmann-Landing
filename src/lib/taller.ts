@@ -5,15 +5,16 @@
  *
  * - `TALLER_WEBHOOK_URL` — la que usa este sitio. La persona no sale de la página:
  *   manda los datos, espera la respuesta y ve el resultado ahí mismo.
- * - `TALLER_FORM_URL` — el formulario servido por n8n. Sigue vivo porque es el link
- *   compartible que se pega en comentarios, mensajes privados y correos.
+ * - `n8n.gvvops.com/form/taller` — el formulario servido por n8n. Desde el 24/09 ya no
+ *   es el link que se reparte (se veía poco profesional): el link compartible es la
+ *   página `#taller-gratis` de este sitio. El formulario sigue vivo para no romper los
+ *   links viejos ya pegados en comentarios, mensajes y el PDF.
  *
  * Las dos terminan en la misma lógica: reusa la ficha si el correo ya existe, engancha
  * a la sesión de la semana, manda la confirmación con el enlace del Meet y avisa por
  * Telegram. Si el taller cambia de día u hora, se cambia en n8n, no acá.
  */
 export const TALLER_WEBHOOK_URL = 'https://n8n.gvvops.com/webhook/taller-sitio';
-export const TALLER_FORM_URL = 'https://n8n.gvvops.com/form/taller';
 
 /** Duración real del taller, en minutos. Vive acá porque solo la usa el botón de agendar. */
 export const TALLER_DURACION_MIN = 45;
@@ -52,7 +53,7 @@ function fin(iso: string): string | null {
 
 function descripcion(meet: string): string {
   return [
-    'Taller práctico de 45 minutos con Mireille Hoffmann.',
+    'Taller práctico de 45 minutos con Mireille Hoffmann, todos los miércoles.',
     '',
     'Vas a cantar vos: son ejercicios en vivo, no una charla para escuchar.',
     'Al final hay tiempo para tus preguntas.',
@@ -65,7 +66,15 @@ function descripcion(meet: string): string {
 }
 
 /**
- * Enlace para agregar el taller a Google Calendar.
+ * Enlace para agregar el taller a Google Calendar, como evento de TODOS los miércoles.
+ * Arranca en la sesión a la que la persona se acaba de anotar y se repite cada semana,
+ * así queda agendada aunque no vuelva a abrir un correo (pedido de Gunnar, 24/09).
+ *
+ * La repetición es `FREQ=WEEKLY` a secas, sin `BYDAY=WE`: las fechas van en UTC y las
+ * 19:00 del miércoles en El Salvador son la 01:00 del jueves en UTC, así que "los
+ * miércoles" podría interpretarse del lado equivocado. Semanal a secas repite el mismo
+ * instante cada 7 días, que es exactamente el taller. `ctz` fija el huso del evento.
+ *
  * Devuelve `null` si n8n no mandó la fecha — el botón simplemente no se dibuja.
  */
 export function googleCalendarUrl(inicio?: string, meet?: string): string | null {
@@ -80,47 +89,17 @@ export function googleCalendarUrl(inicio?: string, meet?: string): string | null
     dates: `${desde}/${hasta}`,
     details: descripcion(meet),
     location: meet,
+    ctz: 'America/El_Salvador',
+    recur: 'RRULE:FREQ=WEEKLY',
   });
   return `https://calendar.google.com/calendar/render?${p.toString()}`;
 }
 
-/** Escapa según RFC 5545: la coma, el punto y coma y la contrabarra son separadores. */
-function escaparIcs(v: string): string {
-  return v.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
-}
-
 /**
- * Contenido de un archivo `.ics`, para Apple Calendar y Outlook.
- * Las líneas van separadas por CRLF porque el estándar lo exige y algunos clientes
- * (Outlook entre ellos) rechazan el archivo si solo tiene saltos de línea normales.
+ * Calendario fijo del taller para Apple Calendar, Outlook y cualquier teléfono:
+ * `public/taller.ics`, un evento de todos los miércoles a las 19:00 hora de El Salvador.
+ * Es un archivo estático y no uno armado en el navegador, para que los correos de
+ * confirmación puedan enlazar el MISMO archivo: una sola fuente de verdad. Si el taller
+ * cambia de hora o de link del Meet, se cambia ahí (y en los correos de n8n).
  */
-export function icsTaller(inicio?: string, meet?: string): string | null {
-  if (!inicio || !meet) return null;
-  const desde = aFormatoCalendario(inicio);
-  const hasta = fin(inicio);
-  const ahora = aFormatoCalendario(new Date().toISOString());
-  if (!desde || !hasta || !ahora) return null;
-
-  return [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Mireille Hoffmann//Taller Vocal//ES',
-    'CALSCALE:GREGORIAN',
-    'METHOD:PUBLISH',
-    'BEGIN:VEVENT',
-    `UID:taller-${desde}@mireille-hoffmann.vercel.app`,
-    `DTSTAMP:${ahora}`,
-    `DTSTART:${desde}`,
-    `DTEND:${hasta}`,
-    `SUMMARY:${escaparIcs(TALLER_TITULO)}`,
-    `DESCRIPTION:${escaparIcs(descripcion(meet))}`,
-    `LOCATION:${escaparIcs(meet)}`,
-    'BEGIN:VALARM',
-    'TRIGGER:-PT30M',
-    'ACTION:DISPLAY',
-    'DESCRIPTION:El taller empieza en 30 minutos',
-    'END:VALARM',
-    'END:VEVENT',
-    'END:VCALENDAR',
-  ].join('\r\n');
-}
+export const TALLER_ICS_URL = '/taller.ics';

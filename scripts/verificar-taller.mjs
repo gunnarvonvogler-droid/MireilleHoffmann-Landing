@@ -13,10 +13,11 @@
  * Las llamadas al webhook del taller se interceptan, así que esto NO crea fichas en el
  * CRM, no manda correos y no dispara avisos de Telegram.
  *
- * Los 8 casos cubren lo que rompe inscripciones reales: el camino feliz, el link directo
+ * Los 9 casos cubren lo que rompe inscripciones reales: el camino feliz, el link directo
  * sin datos, el teléfono compartido (opt-in viejo), corregir los datos, la navegación
  * privada donde `localStorage` lanza, que la franja de la home no cambie, la cadena
- * completa desde el opt-in, y qué se ve si el servidor falla.
+ * completa desde el opt-in, qué se ve si el servidor falla, y la página propia del
+ * taller (#taller-gratis). Desde el 24/09 también comprueba que el calendario se repite.
  */
 
 import { chromium } from 'playwright';
@@ -77,13 +78,17 @@ const campoNombreTaller = (p) => p.locator('#taller-nombre');
   const href = await gcal.getAttribute('href');
   check('1 · el enlace lleva la fecha y los 45 min', href.includes('20260827T010000Z%2F20260827T014500Z'));
   check('1 · abre en pestaña nueva', (await gcal.getAttribute('target')) === '_blank');
+  check('1 · Google lo agenda TODOS los miércoles', href.includes('recur=RRULE%3AFREQ%3DWEEKLY') && href.includes('ctz=America%2FEl_Salvador'));
 
-  const boton = page.getByRole('button', { name: /Apple Calendar u Outlook/i });
-  check('1 · ofrece Apple/Outlook', (await boton.count()) === 1);
-  const dl = page.waitForEvent('download', { timeout: 8000 });
-  await boton.click();
-  const f = await dl;
-  check('1 · el archivo de calendario se descarga', f.suggestedFilename() === 'taller-mireille-hoffmann.ics', f.suggestedFilename());
+  const apple = page.getByRole('link', { name: /Apple Calendar u Outlook/i });
+  check('1 · ofrece Apple/Outlook', (await apple.count()) === 1);
+  const icsHref = await apple.getAttribute('href');
+  check('1 · Apple/Outlook apunta al calendario fijo', icsHref === '/taller.ics', icsHref);
+  const ics = await page.request.get(BASE + '/taller.ics');
+  const icsTxt = await ics.text();
+  check('1 · el calendario fijo existe', ics.ok(), String(ics.status()));
+  check('1 · y se repite cada miércoles a las 19:00 de El Salvador',
+    icsTxt.includes('RRULE:FREQ=WEEKLY') && icsTxt.includes('DTSTART;TZID=America/El_Salvador:20260930T190000'));
   await ctx.close();
 }
 
@@ -189,6 +194,22 @@ const campoNombreTaller = (p) => p.locator('#taller-nombre');
   await page.waitForTimeout(1500);
   check('8 · SI FALLA: avisa y da el WhatsApp de respaldo', (await page.locator('text=No pudimos guardar tu lugar').count()) === 1);
   check('8 · SI FALLA: el botón vuelve a estar disponible', await page.getByRole('button', { name: /Reservar mi lugar en el taller/i }).isEnabled());
+  await ctx.close();
+}
+
+// ── CASO 9 · la página propia del taller, el link que se reparte ─────────────
+{
+  const { page, ctx, llamadas } = await abrir();
+  await page.goto(BASE + '/#taller-gratis?fbclid=abc', { waitUntil: 'networkidle' });
+  await page.waitForTimeout(800);
+  check('9 · PÁGINA: abre el taller, no la home', (await page.locator('h1').innerText()).includes('Taller de técnica vocal'));
+  check('9 · PÁGINA: pide nombre y correo', (await campoNombreTaller(page).count()) === 1);
+  await campoNombreTaller(page).fill('Rosy Sanchez');
+  await page.locator('#taller-email').fill('rosy@correo.com');
+  await page.getByRole('button', { name: /Quiero mi lugar/i }).click();
+  await page.waitForSelector('text=¡Listo, tenés tu lugar!', { timeout: 8000 });
+  check('9 · PÁGINA: la inscribe', llamadas() === 1);
+  check('9 · PÁGINA: ofrece agendarlo', (await page.getByRole('link', { name: /Agregarlo a mi calendario/i }).count()) === 1);
   await ctx.close();
 }
 

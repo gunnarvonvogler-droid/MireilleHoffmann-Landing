@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { AlertCircle, ArrowRight, CalendarPlus, CheckCircle, Loader2, Video } from 'lucide-react';
 import {
+  TALLER_ICS_URL,
   TALLER_WEBHOOK_URL,
   TallerRespuesta,
   googleCalendarUrl,
-  icsTaller,
 } from '../lib/taller';
 import { OptInRecordado } from '../lib/optinMemoria';
 
@@ -95,22 +95,7 @@ export default function TallerSignup({ variante, ctaLabel = 'Reservar mi lugar',
   // ─── Confirmación ────────────────────────────────────────────────────────────
   if (estado === 'listo' || estado === 'ya-anotado') {
     const gcal = googleCalendarUrl(sesion.inicio, sesion.meet);
-    const ics = icsTaller(sesion.inicio, sesion.meet);
     const fecha = sesion.fecha || '';
-
-    const descargarIcs = () => {
-      if (!ics) return;
-      // Blob + enlace sintético en vez de un `href` fijo: el archivo se arma en el
-      // momento y la URL se libera enseguida, sin dejarla viva toda la sesión.
-      const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'taller-mireille-hoffmann.ics';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    };
 
     return (
       <div
@@ -136,52 +121,48 @@ export default function TallerSignup({ variante, ctaLabel = 'Reservar mi lugar',
         </p>
 
         {/* El correo se pierde entre otros cincuenta; el evento en el calendario no.
-            Solo se dibuja si n8n mandó la fecha — sin ella no hay nada que agendar. */}
-        {(gcal || ics) && (
-          <div className="w-full flex flex-col items-center gap-3 mt-4">
-            <p
-              className={`font-sans text-[10px] font-bold uppercase tracking-[0.2em] ${
-                oscuro ? 'text-white/50' : 'text-on-surface-variant'
+            Los dos botones agendan TODOS los miércoles, no solo esta sesión (24/09).
+            Google solo se dibuja si n8n mandó la fecha; Apple/Outlook es un archivo fijo. */}
+        <div className="w-full flex flex-col items-center gap-3 mt-4">
+          <p
+            className={`font-sans text-[10px] font-bold uppercase tracking-[0.2em] ${
+              oscuro ? 'text-white/50' : 'text-on-surface-variant'
+            }`}
+          >
+            Que no se te pase
+          </p>
+          {gcal && (
+            <a
+              href={gcal}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white font-sans text-xs uppercase tracking-widest font-bold py-3.5 px-7 rounded-xl flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-md"
+            >
+              <CalendarPlus size={14} />
+              <span>Agregarlo a mi calendario</span>
+            </a>
+          )}
+          <a
+            href={TALLER_ICS_URL}
+            className={`font-sans text-[11px] underline underline-offset-2 transition-colors cursor-pointer ${
+              oscuro ? 'text-white/60 hover:text-secondary' : 'text-on-surface-variant hover:text-secondary'
+            }`}
+          >
+            Uso Apple Calendar u Outlook
+          </a>
+          {sesion.meet && (
+            <a
+              href={sesion.meet}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`font-serif text-xs flex items-center gap-1.5 transition-colors ${
+                oscuro ? 'text-white/50 hover:text-secondary' : 'text-on-surface-variant hover:text-secondary'
               }`}
             >
-              Que no se te pase
-            </p>
-            {gcal && (
-              <a
-                href={gcal}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 text-white font-sans text-xs uppercase tracking-widest font-bold py-3.5 px-7 rounded-xl flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-md"
-              >
-                <CalendarPlus size={14} />
-                <span>Agregarlo a mi calendario</span>
-              </a>
-            )}
-            {ics && (
-              <button
-                type="button"
-                onClick={descargarIcs}
-                className={`font-sans text-[11px] underline underline-offset-2 transition-colors cursor-pointer ${
-                  oscuro ? 'text-white/60 hover:text-secondary' : 'text-on-surface-variant hover:text-secondary'
-                }`}
-              >
-                Uso Apple Calendar u Outlook
-              </button>
-            )}
-            {sesion.meet && (
-              <a
-                href={sesion.meet}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`font-serif text-xs flex items-center gap-1.5 transition-colors ${
-                  oscuro ? 'text-white/50 hover:text-secondary' : 'text-on-surface-variant hover:text-secondary'
-                }`}
-              >
-                <Video size={12} /> El enlace del taller, por si lo querés guardar aparte
-              </a>
-            )}
-          </div>
-        )}
+              <Video size={12} /> El enlace del taller, por si lo querés guardar aparte
+            </a>
+          )}
+        </div>
       </div>
     );
   }

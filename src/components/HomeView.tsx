@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Check, Star, ChevronDown, Award, Sparkles, Brain, ArrowUpRight, HelpCircle, Music, CalendarDays, Clock, Video } from 'lucide-react';
+import { Check, Star, ChevronDown, Award, Sparkles, Brain, ArrowUpRight, HelpCircle, Music } from 'lucide-react';
 import { ScreenType } from '../types';
-import TallerSignup from './TallerSignup';
+import TallerSeccion from './TallerSeccion';
 
 interface HomeViewProps {
   setScreen: (screen: ScreenType) => void;
@@ -520,40 +520,9 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
         </div>
       </section>
 
-      {/* Taller semanal gratuito — la puerta de menor fricción del funnel.
-          El formulario lo sirve n8n (workflow `Taller - Inscripción Pública`), no este sitio. */}
-      <section id="taller" className="py-20 md:py-28 bg-primary text-white w-full">
-        <div className="max-w-5xl mx-auto px-6 md:px-16 flex flex-col items-center text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full border border-secondary text-secondary font-sans text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
-            Gratis · Todos los miércoles
-          </span>
-
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
-            Taller de técnica vocal en vivo
-          </h2>
-
-          <p className="font-serif text-lg text-white/80 max-w-2xl leading-relaxed mb-10">
-            Ejercicios prácticos conmigo, en directo. No es una charla para escuchar: trabajas tu propia voz y sientes la diferencia en el momento. Al final dejo tiempo para tus preguntas.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 mb-10 font-sans text-[11px] uppercase tracking-widest font-bold text-white/70">
-            <span className="flex items-center gap-2">
-              <CalendarDays size={14} className="text-secondary" />
-              Miércoles 19:00 (El Salvador)
-            </span>
-            <span className="flex items-center gap-2">
-              <Clock size={14} className="text-secondary" />
-              45 minutos
-            </span>
-            <span className="flex items-center gap-2">
-              <Video size={14} className="text-secondary" />
-              Por Google Meet
-            </span>
-          </div>
-
-          <TallerSignup variante="oscuro" />
-        </div>
-      </section>
+      {/* Taller semanal gratuito — la puerta de menor fricción del funnel. La misma
+          franja es también la página propia del taller (#taller-gratis). */}
+      <TallerSeccion />
 
       {/* Pricing/Modalities Section */}
       <section id="precios" className="py-20 md:py-32 bg-surface w-full">

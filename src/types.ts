@@ -7,7 +7,8 @@ export type ScreenType =
   | 'gracias-cantantes'
   | 'gracias-oradores'
   | 'privacidad'
-  | 'venta-agudos';
+  | 'venta-agudos'
+  | 'taller';
 
 export type Audience = 'cantantes' | 'oradores';
 

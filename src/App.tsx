@@ -7,6 +7,7 @@ import OptInView from './components/OptInView';
 import ThankYouOptInView from './components/ThankYouOptInView';
 import PrivacyView from './components/PrivacyView';
 import SalesPageView from './components/SalesPageView';
+import TallerSeccion from './components/TallerSeccion';
 import { ScreenType } from './types';
 import { ArrowUp, Sparkles, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -20,6 +21,9 @@ const hashToScreen: Record<string, ScreenType> = {
   '#gracias-oradores': 'gracias-oradores',
   '#privacidad': 'privacidad',
   '#tu-agudo-en-21-dias': 'venta-agudos',
+  // El link que se reparte para anotarse al taller (24/09). No es `#taller` porque ese
+  // id ya es el ancla de la franja del taller dentro de la home.
+  '#taller-gratis': 'taller',
 };
 
 const screenFromHash = (): ScreenType => {
@@ -64,6 +68,7 @@ export default function App() {
       'gracias-oradores': '#gracias-oradores',
       privacidad: '#privacidad',
       'venta-agudos': '#tu-agudo-en-21-dias',
+      taller: '#taller-gratis',
     };
     if (newScreen === 'home') {
       window.history.pushState(null, '', ' ');
@@ -137,6 +142,9 @@ export default function App() {
             )}
             {screen === 'venta-agudos' && (
               <SalesPageView />
+            )}
+            {screen === 'taller' && (
+              <TallerSeccion pagina />
             )}
           </motion.div>
         </AnimatePresence>
