@@ -5,8 +5,8 @@ import TallerSignup from './TallerSignup';
 interface TallerSeccionProps {
   /**
    * `true` cuando es la página propia del taller (#taller-gratis), el link que se
-   * reparte en redes y mensajes desde el 24/09. Ocupa la pantalla entera y el título
-   * pasa a ser el h1; en la home es una franja más, con su h2.
+   * reparte en redes y mensajes desde el 24/09. La franja pasa a ser una tarjeta sobre
+   * fondo claro y el título es el h1; en la home es una franja más, con su h2.
    */
   pagina?: boolean;
 }
@@ -18,11 +18,11 @@ interface TallerSeccionProps {
  */
 export default function TallerSeccion({ pagina = false }: TallerSeccionProps) {
   const Titulo = pagina ? 'h1' : 'h2';
-  return (
+  const seccion = (
     <section
       id={pagina ? undefined : 'taller'}
       className={`bg-primary text-white w-full ${
-        pagina ? 'min-h-[calc(100vh-5rem)] py-16 md:py-24 flex items-center' : 'py-20 md:py-28'
+        pagina ? 'max-w-5xl mx-auto rounded-3xl py-14 md:py-20' : 'py-20 md:py-28'
       }`}
     >
       <div className="max-w-5xl mx-auto px-6 md:px-16 flex flex-col items-center text-center">
@@ -57,4 +57,8 @@ export default function TallerSeccion({ pagina = false }: TallerSeccionProps) {
       </div>
     </section>
   );
+
+  // Como página, el encabezado del sitio (transparente, con el nombre en azul oscuro)
+  // queda sobre fondo claro, igual que en las demás páginas; la franja pasa a ser tarjeta.
+  return pagina ? <div className="w-full bg-surface pt-24 md:pt-28 pb-12 md:pb-20 px-4 md:px-6 min-h-screen">{seccion}</div> : seccion;
 }
