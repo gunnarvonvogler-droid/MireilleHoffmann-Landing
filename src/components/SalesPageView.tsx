@@ -212,7 +212,7 @@ export default function SalesPageView() {
           </div>
           <div className="max-w-2xl mx-auto space-y-4 font-serif text-lg text-on-surface-variant leading-relaxed">
             <p>
-              Veintiún días. Diez o quince minutos por día. El programa son 32 páginas, 2 o 3 ejercicios por día con el porqué de cada uno, y viene con un cuaderno aparte de 12 para imprimir y escribir encima.
+              Veintiún días. Diez minutos por día. El programa son 32 páginas, 2 o 3 ejercicios por día con el porqué de cada uno, y viene con un cuaderno aparte de 12 para imprimir y escribir encima.
             </p>
             <p>
               Y el orden termina en un lugar concreto: tu canción. En la última semana llevás todo el trabajo a la frase con el agudo que hoy no te sale.{' '}
@@ -284,7 +284,7 @@ export default function SalesPageView() {
                 Buscás un curso completo de canto desde cero. Esto resuelve un problema y lo resuelve bien; no te enseña a cantar de arriba a abajo. Y no reemplaza la supervisión de un profesor: hay cosas que un PDF no puede darte, como escucharte y verte en vivo, o mostrarte los ejercicios para que los repitas.
               </p>
               <p>
-                Querés resultados sin practicar. Son quince minutos por día durante tres semanas. Es poco, pero hay que hacerlo.
+                Querés resultados sin practicar. Son diez minutos por día durante tres semanas. Es poco, pero hay que hacerlo.
               </p>
             </div>
           </div>
