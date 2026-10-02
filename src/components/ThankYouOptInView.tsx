@@ -107,7 +107,7 @@ export default function ThankYouOptInView({ audience }: ThankYouOptInViewProps) 
               </p>
               <p className="font-display text-2xl font-bold text-primary leading-tight mb-3">Tu agudo en 21 días</p>
               <p className="font-serif text-base text-on-surface-variant leading-relaxed max-w-md mb-6">
-                Tres semanas, quince minutos por día, y tu propia voz corregida por mí por WhatsApp.{' '}
+                Tres semanas, diez minutos por día, y tu propia voz corregida por mí por WhatsApp.{' '}
                 <strong className="text-primary font-semibold">$37, pago único</strong>, con 7 días de garantía.
               </p>
               <a

@@ -6,6 +6,9 @@ import { ArrowRight, Check, Gift, ShieldCheck, X } from 'lucide-react';
 // la venta vive en la web, en la misma marca que la guia gratis, y solo el pago sale
 // a Hotmart. El texto es el aprobado por Mimi el 10/09, tal cual, con el masculino
 // generico del material publicado. Fuente: "Pagina de Venta - Tu Agudo en 21 Dias" en el vault.
+// 2026-09-30, aprobado por Gunnar: titular nuevo (opcion A), el bloque de las correcciones sube
+// justo debajo del Bloque 1, dos parrafos que copiaban la guia gratis reescritos, y la linea del
+// precio en moneda local bajo cada boton.
 const CHECKOUT_URL = 'https://pay.hotmart.com/L107563626F';
 
 const PREGUNTAS = [
@@ -83,6 +86,9 @@ function BotonCompra({ label = 'Empezar mis 21 días — $37', claro = false }: 
       <p className={`font-serif text-xs flex items-center gap-1.5 ${claro ? 'text-white/70' : 'text-on-surface-variant'}`}>
         <ShieldCheck size={13} /> Pago seguro con Hotmart · 7 días de garantía
       </p>
+      <p className={`font-serif text-[11px] text-center -mt-1.5 ${claro ? 'text-white/60' : 'text-on-surface-variant/80'}`}>
+        US$37 · en la caja lo ves en tu moneda; en México se suma el IVA
+      </p>
     </div>
   );
 }
@@ -111,7 +117,7 @@ export default function SalesPageView() {
               transition={{ delay: 0.1 }}
               className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-primary leading-[1.05] mb-6"
             >
-              Un agudo no tiene que doler. Y no se arregla cantando más fuerte.
+              Ese agudo que te arde, mandámelo. Lo escucho yo y te digo qué le pasa a tu voz.
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 15 }}
@@ -119,7 +125,7 @@ export default function SalesPageView() {
               transition={{ delay: 0.2 }}
               className="font-serif text-lg text-on-surface-variant leading-relaxed mb-10 max-w-xl mx-auto md:mx-0"
             >
-              Tres semanas, quince minutos por día, y tu propia voz corregida por mí. El método completo para llegar arriba sin apretar la garganta.
+              La guía gratis te enseña a darte cuenta cuando forzás. Lo que no puede hacer es escucharte. En 21 días llevás el trabajo a tu propia canción, y tres veces me mandás un audio por WhatsApp y te contesto yo, a vos. Para que el agudo deje de ser el momento de la canción que te da miedo.
             </motion.p>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="md:items-start flex md:block justify-center">
               <div className="md:inline-block">
@@ -162,9 +168,28 @@ export default function SalesPageView() {
             Las cinco son la misma pregunta. Y ninguna se contesta con "practicá más".
           </p>
           <p className="font-serif text-lg text-on-surface-variant leading-relaxed">
-            Si cada vez que buscás una nota alta sentís que algo se aprieta, que raspa, que tenés que empujar desde la garganta y que después lo pagás,{' '}
-            <strong className="text-primary">no es porque tu voz sea limitada</strong>. Es porque estás empujando desde un lugar que no está hecho para empujar.
+            Tampoco se contesta con otro video ni con otra hoja de ejercicios. El mismo «me arde» puede venir de lugares muy distintos, y leyéndote no puedo saber de dónde viene el tuyo.{' '}
+            <strong className="text-primary">Escuchándote, sí.</strong> Ahí está la diferencia entre adivinar qué ejercicio te toca y saberlo.
           </p>
+        </div>
+      </section>
+
+      {/* Bloque 3 — Lo que lo hace distinto de un curso grabado */}
+      <section className="py-16 md:py-24 px-6 bg-primary text-white">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 text-white">Lo que lo hace distinto de un curso grabado</h2>
+          <div className="space-y-5 font-serif text-lg leading-relaxed text-white/85">
+            <p>Esta es la parte que ningún PDF puede darte, y es la razón por la que esto no es solo un PDF.</p>
+            <p>
+              <strong className="text-white">Tres veces durante el programa me mandás un audio tuyo, y yo lo escucho.</strong> Tu voz, y yo. No un formulario ni una respuesta automática.
+            </p>
+            <p>
+              <strong className="text-white">Y te contesto a vos, en privado, por WhatsApp.</strong> Qué escucho en tu voz, qué corregiría, y con qué ejercicio del programa. No tenés que reservarte una hora ni coincidir con nadie: mandás tu audio cuando te toque, y te respondo yo.
+            </p>
+            <p>
+              Además, todos los miércoles doy un taller en vivo y gratuito, y estás invitado mientras dure tu programa. <strong className="text-white">No hace falta que vengas</strong> —tus tres correcciones te llegan igual—, pero si venís, escuchar cómo corrijo la voz de otra persona enseña muchísimo: casi siempre le pasa lo mismo que a vos.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -187,27 +212,11 @@ export default function SalesPageView() {
           </div>
           <div className="max-w-2xl mx-auto space-y-4 font-serif text-lg text-on-surface-variant leading-relaxed">
             <p>
-              Veintiún días. Diez o quince minutos por día. El programa son 32 páginas, 2 o 3 ejercicios por día con el porqué de cada uno, y viene con un cuaderno aparte de 12 para imprimir y escribir encima.
-            </p>
-            <p>Y nada de esto te pide cantar más fuerte. Todo te pide lo contrario: hacer menos, mejor repartido.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Bloque 3 — Lo que lo hace distinto de un curso grabado */}
-      <section className="py-16 md:py-24 px-6 bg-primary text-white">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 text-white">Lo que lo hace distinto de un curso grabado</h2>
-          <div className="space-y-5 font-serif text-lg leading-relaxed text-white/85">
-            <p>Esta es la parte que ningún PDF puede darte, y es la razón por la que esto no es solo un PDF.</p>
-            <p>
-              <strong className="text-white">Tres veces durante el programa me mandás un audio tuyo, y yo lo escucho.</strong> Tu voz, y yo. No un formulario ni una respuesta automática.
+              Veintiún días. Diez minutos por día. El programa son 32 páginas, 2 o 3 ejercicios por día con el porqué de cada uno, y viene con un cuaderno aparte de 12 para imprimir y escribir encima.
             </p>
             <p>
-              <strong className="text-white">Y te contesto a vos, en privado, por WhatsApp.</strong> Qué escucho en tu voz, qué corregiría, y con qué ejercicio del programa. No tenés que reservarte una hora ni coincidir con nadie: mandás tu audio cuando te toque, y te respondo yo.
-            </p>
-            <p>
-              Además, todos los miércoles doy un taller en vivo y gratuito, y estás invitado mientras dure tu programa. <strong className="text-white">No hace falta que vengas</strong> —tus tres correcciones te llegan igual—, pero si venís, escuchar cómo corrijo la voz de otra persona enseña muchísimo: casi siempre le pasa lo mismo que a vos.
+              Y el orden termina en un lugar concreto: tu canción. En la última semana llevás todo el trabajo a la frase con el agudo que hoy no te sale.{' '}
+              <strong className="text-primary">Y ahí no dependés solo de lo que sentís:</strong> cuando me mandás tu audio, te digo yo qué escucho y con qué ejercicio del programa se trabaja.
             </p>
           </div>
         </div>
@@ -275,7 +284,7 @@ export default function SalesPageView() {
                 Buscás un curso completo de canto desde cero. Esto resuelve un problema y lo resuelve bien; no te enseña a cantar de arriba a abajo. Y no reemplaza la supervisión de un profesor: hay cosas que un PDF no puede darte, como escucharte y verte en vivo, o mostrarte los ejercicios para que los repitas.
               </p>
               <p>
-                Querés resultados sin practicar. Son quince minutos por día durante tres semanas. Es poco, pero hay que hacerlo.
+                Querés resultados sin practicar. Son diez minutos por día durante tres semanas. Es poco, pero hay que hacerlo.
               </p>
             </div>
           </div>
