@@ -18,7 +18,7 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
     disposicionInversion: 'capital-disponible',
     compromisoPractica: 'comprometido',
     meta: '',
-    planSeleccionado: selectedPlan || 'Paquete 3 Meses ($500/10 sesiones)',
+    planSeleccionado: selectedPlan || 'Programa 10 Semanas ($500/10 sesiones)',
     aceptaPuntualidad: false,
   });
 
@@ -245,15 +245,9 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                           <label className="font-sans text-[11px] uppercase tracking-wider font-bold text-on-surface-variant">
                             Modalidad de entrenamiento
                           </label>
-                          <select
-                            value={formData.modalidad}
-                            onChange={(e) => setFormData({ ...formData, modalidad: e.target.value })}
-                            className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 font-serif text-sm focus:outline-none focus:border-secondary transition-colors cursor-pointer"
-                          >
-                            <option value="online">100% Online vía Zoom/Meet</option>
-                            <option value="presencial">Presencial en San Salvador (zona Escalón)</option>
-                            <option value="domicilio">A domicilio (recargo de $20 por sesión)</option>
-                          </select>
+                          <div className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 font-serif text-sm text-on-surface-variant">
+                            100% en línea por videollamada
+                          </div>
                         </div>
                       </div>
 
@@ -267,7 +261,7 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                           onChange={(e) => setFormData({ ...formData, planSeleccionado: e.target.value })}
                           className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 font-serif text-sm focus:outline-none focus:border-secondary transition-colors cursor-pointer"
                         >
-                          <option value="Paquete 3 Meses ($500/10 sesiones)">Paquete 3 Meses ($500 / 10 sesiones)</option>
+                          <option value="Programa 10 Semanas ($500/10 sesiones)">Programa 10 Semanas ($500 / 10 sesiones)</option>
                           <option value="Sesión Individual ($55/hora)">Sesión Individual ($55 / hora)</option>
                         </select>
                       </div>
@@ -281,7 +275,7 @@ export default function ApplyNowView({ selectedPlan }: ApplyNowViewProps) {
                           <p className="font-serif text-xs text-on-surface-variant -mt-0.5 mb-0.5">
                             {formData.planSeleccionado === 'Sesión Individual ($55/hora)'
                               ? 'La sesión individual tiene una inversión de $55/hora. Para armarte la mejor propuesta, contanos tu situación:'
-                              : 'El programa completo es de 3 meses, con una inversión de $500. Para armarte la mejor propuesta, contanos tu situación:'}
+                              : 'El programa completo es de 10 semanas, con una inversión de $500. Para armarte la mejor propuesta, contanos tu situación:'}
                           </p>
                           <select
                             value={formData.disposicionInversion}

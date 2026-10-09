@@ -1,25 +1,29 @@
 @import "tailwindcss";
 
+/* Marca única de Mireille Hoffmann (2026-10-08): la de los PDF, que eligió Gunnar el 2026-08-20.
+   Fuente de verdad: el sistema de diseño «Mireille Hoffmann - Vocal Technique» en Claude Design.
+   Títulos Playfair Display, lectura Source Serif 4, etiquetas y botones Hanken Grotesk. */
 @theme {
-  --font-display: "Cormorant Garamond", serif;
-  --font-serif: "Jost", sans-serif;
-  --font-sans: "Jost", sans-serif;
+  --font-display: "Playfair Display", serif;
+  --font-serif: "Source Serif 4", serif;
+  --font-sans: "Hanken Grotesk", sans-serif;
 
-  --color-primary: #22314d;
-  --color-secondary: #bf6b45;
+  --color-primary: #0b1728;
+  --color-secondary: #9f402d;
+  --color-coral: #fd876f;
   --color-background: #e9e3d6;
-  --color-surface: #f7f4ee;
+  --color-surface: #fff8f4;
   --color-surface-dim: #e4ddcd;
-  --color-surface-bright: #f7f4ee;
+  --color-surface-bright: #fff8f4;
   --color-surface-container-lowest: #ffffff;
   --color-surface-container-low: #fbf9f4;
-  --color-surface-container: #f7f4ee;
+  --color-surface-container: #fff8f4;
   --color-surface-container-high: #f0ece2;
   --color-surface-container-highest: #e9e3d6;
-  --color-on-surface: #22314d;
+  --color-on-surface: #0b1728;
   --color-on-surface-variant: #6b7185;
-  --color-inverse-surface: #22314d;
-  --color-inverse-on-surface: #f2ede3;
+  --color-inverse-surface: #0b1728;
+  --color-inverse-on-surface: #f7f4ee;
   --color-outline: #8d92a3;
   --color-outline-variant: #d6d0c1;
 
@@ -56,7 +60,16 @@ h1, h2, h3, h4, h5, h6, .font-display {
 }
 
 .vocal-shadow {
-  box-shadow: 0 10px 40px rgba(34, 49, 77, 0.08);
+  box-shadow: 0 10px 40px rgba(11, 23, 40, 0.08);
+}
+
+/* Sobre el azul de marca, el acento es el coral: el terracota #9f402d no se lee ahí. Y un botón coral lleva
+   texto oscuro, porque con texto blanco encima el coral tampoco se lee. Regla de la marca, no de un componente. */
+.bg-primary {
+  --color-secondary: var(--color-coral);
+}
+.bg-primary .bg-secondary.text-white {
+  color: var(--color-primary);
 }
 
 /* Vaivén lento del marco punteado de la sección Estructura del Programa */

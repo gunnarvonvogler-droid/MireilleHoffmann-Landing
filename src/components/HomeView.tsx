@@ -57,7 +57,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-secondary font-display text-lg sm:text-xl md:text-2xl font-semibold uppercase tracking-wide leading-relaxed mb-6"
             >
-              Transforma tu voz en 3 meses: el camino hacia la maestría vocal
+              Transforma tu voz en 10 semanas: el camino hacia la maestría vocal
             </motion.p>
 
             <motion.p
@@ -280,7 +280,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
                 Estructura del Programa
               </h2>
               <p className="font-serif text-lg text-on-surface-variant mb-10 leading-relaxed">
-                Un viaje interactivo de 3 meses dividido en módulos especializados que se adaptan a tus necesidades y metas del momento
+                Un acompañamiento de 10 semanas que empieza por tu base, el sistema respiratorio, y avanza por módulos según tu nivel y tus metas del momento
               </p>
 
               {/* Accordion List */}
@@ -532,7 +532,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
               Modalidades de Entrenamiento
             </h2>
             <p className="font-serif text-lg text-on-surface-variant max-w-2xl mx-auto italic">
-              Sesiones presenciales en San Salvador o virtuales vía Zoom o Google Meet, diseñadas para tu evolución constante.
+              Sesiones 100% en línea por videollamada, diseñadas para tu evolución constante.
             </p>
           </div>
 
@@ -579,7 +579,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
               </button>
             </div>
 
-            {/* Modalidad 2: Paquete 3 meses (RECOMENDADO) */}
+            {/* Modalidad 2: Programa de 10 semanas (RECOMENDADO) */}
             <div className="bg-primary p-8 lg:p-12 rounded-xl vocal-shadow flex flex-col items-center text-center text-white relative overflow-hidden group shadow-2xl">
               <div className="absolute top-0 right-0 bg-secondary text-white px-6 py-2 rounded-bl-xl font-sans text-[9px] font-bold tracking-widest uppercase">
                 RECOMENDADO
@@ -588,7 +588,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
                 Inmersión Total
               </span>
               <h3 className="font-display text-3xl md:text-4xl font-bold text-white mb-8">
-                Paquete 3 Meses
+                Programa 10 Semanas
               </h3>
               <div className="flex items-baseline gap-1 mb-8">
                 <span className="text-5xl font-bold text-white font-serif">$500</span>
@@ -600,37 +600,34 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
                   <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center text-white shrink-0">
                     <Star size={10} className="fill-white stroke-none" />
                   </div>
-                  <span>Seguimiento personalizado 360°</span>
+                  <span>Un audio tuyo revisado entre sesiones</span>
                 </li>
                 <li className="flex items-center gap-3 text-sm text-primary-fixed font-serif">
                   <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center text-white shrink-0">
                     <Star size={10} className="fill-white stroke-none" />
                   </div>
-                  <span>Soporte vía WhatsApp</span>
+                  <span>Un mes de seguimiento al terminar</span>
                 </li>
                 <li className="flex items-center gap-3 text-sm text-primary-fixed font-serif">
                   <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center text-white shrink-0">
                     <Star size={10} className="fill-white stroke-none" />
                   </div>
-                  <span>Material exclusivo y guías</span>
+                  <span>Guía de los 3 fundamentos y curso «Tu agudo en 21 días», con audios</span>
                 </li>
                 <li className="flex items-center gap-3 text-sm text-primary-fixed font-serif">
                   <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center text-white shrink-0">
                     <Star size={10} className="fill-white stroke-none" />
                   </div>
-                  <span>Flexibilidad San Salvador / Zoom</span>
+                  <span>Taller en línea de los miércoles</span>
                 </li>
               </ul>
 
               <button
-                onClick={() => handleSelectPlan('Paquete 3 Meses ($500/10 sesiones)')}
+                onClick={() => handleSelectPlan('Programa 10 Semanas ($500/10 sesiones)')}
                 className="w-full py-4 bg-secondary text-white font-sans text-xs font-bold rounded-xl hover:bg-secondary/90 transition-all shadow-lg uppercase tracking-widest cursor-pointer"
               >
                 Comenzar Maestría
               </button>
-              <p className="mt-6 text-[10px] text-primary-fixed-dim italic">
-                * Opción a domicilio por $20 adicionales por sesión.
-              </p>
             </div>
           </div>
         </div>
