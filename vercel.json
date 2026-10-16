@@ -1,5 +1,5 @@
 {
   "redirects": [
-    { "source": "/(.*)", "destination": "https://mireille.gvvops.com/$1", "permanent": true }
+    { "source": "/(.*)", "destination": "https://mireillehoffmann.com/$1", "permanent": true }
   ]
 }
