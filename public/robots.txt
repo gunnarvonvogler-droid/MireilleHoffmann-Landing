@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mireille-hoffmann.vercel.app/sitemap.xml
+Sitemap: https://mireille.gvvops.com/sitemap.xml

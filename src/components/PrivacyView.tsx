@@ -96,7 +96,7 @@ export default function PrivacyView() {
               <p>Para que todo esto funcione, tus datos pasan por servicios de terceros:</p>
               <ul className="list-disc pl-5 flex flex-col gap-2">
                 <li>
-                  <strong className="text-primary font-semibold">Vercel</strong> — el alojamiento de este sitio.
+                  <strong className="text-primary font-semibold">Hetzner</strong> — el servidor propio, en Alemania, donde está alojado este sitio.
                 </li>
                 <li>
                   <strong className="text-primary font-semibold">n8n y NocoDB</strong>, en un servidor propio — donde
