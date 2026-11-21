@@ -93,6 +93,32 @@ function BotonCompra({ label = 'Empezar mis 21 días — $37', claro = false }: 
   );
 }
 
+// Promo de Navidad 2026, aprobada por Gunnar el 21/11: $37 + sesion individual de 1 h de regalo
+// (valor $55) por comprar antes del 25/12, usable hasta el 1/04/2027. La franja se apaga sola
+// al terminar el 25/12 en hora de El Salvador (UTC-6). Vault: "Promo de Navidad 2026 - plan de venta".
+const FIN_PROMO_NAVIDAD = Date.parse('2026-12-26T00:00:00-06:00');
+export function promoNavidadActiva(ahora: number = Date.now()) {
+  return ahora < FIN_PROMO_NAVIDAD;
+}
+
+function PromoNavidad() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="mb-8 rounded-2xl border border-secondary/40 bg-white px-5 py-4 text-left shadow-sm"
+    >
+      <p className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-secondary flex items-center gap-2 mb-2">
+        <Gift size={14} /> Promo de Navidad · hasta el 25 de diciembre
+      </p>
+      <p className="font-serif text-base text-primary leading-relaxed">
+        Si entrás antes del 25, te regalo <strong>una sesión individual de una hora conmigo</strong>, en línea (vale US$55). La usás cuando quieras hasta el 1 de abril.
+      </p>
+      <p className="font-serif text-sm text-on-surface-variant mt-1.5">US$92 de valor por US$37.</p>
+    </motion.div>
+  );
+}
+
 export default function SalesPageView() {
   useEffect(() => {
     window.fbq?.('track', 'ViewContent', { value: 37, currency: 'USD', content_name: 'Tu agudo en 21 días' });
@@ -104,6 +130,7 @@ export default function SalesPageView() {
       <section className="pt-28 md:pt-36 pb-16 md:pb-24 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-center">
           <div className="md:col-span-7 text-center md:text-left">
+            {promoNavidadActiva() && <PromoNavidad />}
             <motion.span
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
