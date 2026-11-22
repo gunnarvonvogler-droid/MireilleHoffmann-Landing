@@ -119,13 +119,15 @@ function PromoNavidad() {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mb-8 rounded-2xl bg-secondary text-white px-6 py-5 sm:px-7 sm:py-6 text-left shadow-xl"
+      className="md:col-span-12 rounded-2xl bg-secondary text-white px-6 py-5 sm:px-8 sm:py-7 text-left shadow-xl md:flex md:items-center md:gap-10"
     >
-      <p className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 flex items-center gap-2 mb-3">
-        <Gift size={16} /> Promo de Navidad · solo hasta el 25 de diciembre
-      </p>
-      <div className="mb-3"><PrecioPromo claro /></div>
-      <p className="font-serif text-sm sm:text-base text-white/90 leading-relaxed">
+      <div className="md:shrink-0">
+        <p className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 flex items-center gap-2 mb-3">
+          <Gift size={16} /> Promo de Navidad · solo hasta el 25 de diciembre
+        </p>
+        <div className="mb-3 md:mb-0"><PrecioPromo claro /></div>
+      </div>
+      <p className="font-serif text-sm sm:text-base md:text-lg text-white/90 leading-relaxed md:border-l md:border-white/25 md:pl-10">
         Si entrás antes del 25, te regalo <strong className="text-white">una sesión individual de una hora conmigo</strong>, en línea (vale US$55). La usás cuando quieras hasta el 1 de abril.
       </p>
     </motion.div>
@@ -152,8 +154,8 @@ export default function SalesPageView() {
       {/* Titular y bajada */}
       <section className="pt-28 md:pt-36 pb-16 md:pb-24 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-center">
+          {promoNavidadActiva() && <PromoNavidad />}
           <div className="md:col-span-7 text-center md:text-left">
-            {promoNavidadActiva() && <PromoNavidad />}
             <motion.span
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
