@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { Check, Star, ChevronDown, Award, Sparkles, Brain, ArrowUpRight, HelpCircle, Music, Gift, ArrowRight } from 'lucide-react';
 import { ScreenType } from '../types';
 import TallerSeccion from './TallerSeccion';
-import { promoNavidadActiva } from './SalesPageView';
+import { promoNavidadActiva, PrecioPromo } from './SalesPageView';
 
 interface HomeViewProps {
   setScreen: (screen: ScreenType) => void;
@@ -48,9 +48,7 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
                 <span className="flex items-center gap-2 font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 mb-2">
                   <Gift size={16} /> Promo de Navidad · solo hasta el 25 de diciembre
                 </span>
-                <span className="block font-display text-2xl sm:text-3xl font-bold leading-tight mb-2">
-                  US$92 de valor por US$37
-                </span>
+                <span className="block mb-3"><PrecioPromo claro /></span>
                 <span className="block font-serif text-sm sm:text-base text-white/90 leading-relaxed mb-4">
                   <strong className="font-semibold text-white">Tu agudo en 21 días</strong> + una sesión individual de una hora conmigo, de regalo (vale US$55).
                 </span>
