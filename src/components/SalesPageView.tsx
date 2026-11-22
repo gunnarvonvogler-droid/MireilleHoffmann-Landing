@@ -83,6 +83,7 @@ function BotonCompra({ label = 'Empezar mis 21 días — $37', claro = false }: 
         <span>{label}</span>
         <ArrowRight size={14} />
       </a>
+      <RecordatorioPromo claro={claro} />
       <p className={`font-serif text-xs flex items-center gap-1.5 ${claro ? 'text-white/70' : 'text-on-surface-variant'}`}>
         <ShieldCheck size={13} /> Pago seguro con Hotmart · 7 días de garantía
       </p>
@@ -90,6 +91,56 @@ function BotonCompra({ label = 'Empezar mis 21 días — $37', claro = false }: 
         US$37 · en la caja lo ves en tu moneda; en México se suma el IVA
       </p>
     </div>
+  );
+}
+
+// Promo de Navidad 2026, aprobada por Gunnar el 21/11: $37 + sesion individual de 1 h de regalo
+// (valor $55) por comprar antes del 25/12, usable hasta el 1/04/2027. La franja se apaga sola
+// al terminar el 25/12 en hora de El Salvador (UTC-6). Vault: "Promo de Navidad 2026 - plan de venta".
+const FIN_PROMO_NAVIDAD = Date.parse('2026-12-26T00:00:00-06:00');
+export function promoNavidadActiva(ahora: number = Date.now()) {
+  return ahora < FIN_PROMO_NAVIDAD;
+}
+
+// Precio de la promo: el valor real del paquete (37 + 55, los dos se venden a ese precio) tachado,
+// y lo que se paga, grande. Gunnar, 21/11: "tacha el 92 y que el 37 se vea más grande".
+export function PrecioPromo({ claro = false, grande = false }: { claro?: boolean; grande?: boolean }) {
+  return (
+    <span className="flex items-baseline gap-3 flex-wrap">
+      <span className={`font-sans text-xs font-bold uppercase tracking-widest ${claro ? 'text-white/85' : 'text-on-surface-variant'}`}>Pagás solo</span>
+      <span className={`font-display font-bold leading-none ${grande ? 'text-6xl md:text-7xl' : 'text-5xl'} ${claro ? 'text-white' : 'text-primary'}`}>US$37</span>
+      <span className={`font-display text-2xl md:text-3xl font-semibold line-through decoration-2 ${claro ? 'text-white/70' : 'text-on-surface-variant/70'}`}>US$92</span>
+    </span>
+  );
+}
+
+function PromoNavidad() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="md:col-span-12 rounded-2xl bg-secondary text-white px-6 py-5 sm:px-8 sm:py-7 text-left shadow-xl md:flex md:items-center md:gap-10"
+    >
+      <div className="md:shrink-0">
+        <p className="font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 flex items-center gap-2 mb-3">
+          <Gift size={16} /> Promo de Navidad · solo hasta el 25 de diciembre
+        </p>
+        <div className="mb-3 md:mb-0"><PrecioPromo claro /></div>
+      </div>
+      <p className="font-serif text-sm sm:text-base md:text-lg text-white/90 leading-relaxed md:border-l md:border-white/25 md:pl-10">
+        Si entrás antes del 25, te regalo <strong className="text-white">una sesión individual de una hora conmigo</strong>, en línea (vale US$55). La usás cuando quieras hasta el 1 de abril.
+      </p>
+    </motion.div>
+  );
+}
+
+// Recordatorio corto debajo de cada botón de compra mientras dure la promo.
+function RecordatorioPromo({ claro = false }: { claro?: boolean }) {
+  if (!promoNavidadActiva()) return null;
+  return (
+    <p className={`font-sans text-[11px] font-bold uppercase tracking-widest text-center flex items-center gap-1.5 ${claro ? 'text-white' : 'text-secondary'}`}>
+      <Gift size={13} /> + 1 h conmigo de regalo si entrás antes del 25/12
+    </p>
   );
 }
 
@@ -103,6 +154,7 @@ export default function SalesPageView() {
       {/* Titular y bajada */}
       <section className="pt-28 md:pt-36 pb-16 md:pb-24 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-center">
+          {promoNavidadActiva() && <PromoNavidad />}
           <div className="md:col-span-7 text-center md:text-left">
             <motion.span
               initial={{ opacity: 0, y: 10 }}
@@ -227,6 +279,16 @@ export default function SalesPageView() {
         <div className="max-w-3xl mx-auto">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-primary mb-10 text-center">Qué te llevás</h2>
           <ul className="space-y-4 mb-12">
+            {promoNavidadActiva() && (
+              <li className="flex gap-4 items-start bg-secondary text-white rounded-xl p-5 shadow-lg">
+                <span className="w-7 h-7 rounded-full bg-white text-secondary flex items-center justify-center shrink-0 mt-0.5">
+                  <Gift size={15} />
+                </span>
+                <p className="font-serif text-base text-white/90 leading-relaxed">
+                  <strong className="text-white">Regalo de Navidad: una sesión individual de una hora conmigo</strong> — en línea, en vivo, solo vos y yo. Vale US$55 y te la regalo si entrás antes del 25 de diciembre. La usás cuando quieras hasta el 1 de abril.
+                </p>
+              </li>
+            )}
             {INCLUYE.map((item) => (
               <li key={item.titulo} className="flex gap-4 items-start bg-surface-container-lowest border border-surface-variant rounded-xl p-5">
                 <span className="w-7 h-7 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0 mt-0.5">
@@ -238,6 +300,27 @@ export default function SalesPageView() {
               </li>
             ))}
           </ul>
+
+          {promoNavidadActiva() && (
+            <div className="mb-12 rounded-2xl border-2 border-secondary bg-surface-container-lowest p-6 md:p-8">
+              <p className="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-5 flex items-center gap-2">
+                <Gift size={14} /> Lo que te llevás con la promo de Navidad
+              </p>
+              <div className="space-y-2 font-serif text-base text-on-surface-variant">
+                <p className="flex justify-between gap-4"><span>Tu agudo en 21 días</span><span>US$37</span></p>
+                <p className="flex justify-between gap-4"><span>Sesión individual de una hora conmigo</span><span>US$55</span></p>
+                <p className="flex justify-between gap-4 border-t border-outline-variant/40 pt-2 text-on-surface-variant/80"><span>Valor real</span><span className="line-through">US$92</span></p>
+              </div>
+              <div className="mt-5 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+                <div>
+                  <p className="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-primary mb-1">Hasta el 25 de diciembre pagás</p>
+                  <p className="font-display text-5xl font-bold text-secondary leading-none">US$37</p>
+                </div>
+                <p className="font-serif text-sm text-on-surface-variant max-w-[16rem]">Te ahorrás US$55: la sesión va de regalo.</p>
+              </div>
+              <div className="mt-7"><BotonCompra label="Quiero mi promo de Navidad — $37" /></div>
+            </div>
+          )}
 
           <div className="bg-surface-container-high border border-outline-variant/40 rounded-2xl p-7 md:p-9">
             <div className="flex items-center gap-3 mb-4">
@@ -310,8 +393,19 @@ export default function SalesPageView() {
       <section className="py-16 md:py-24 px-6 bg-surface-container-high">
         <div className="max-w-xl mx-auto bg-surface-container-lowest border border-surface-variant rounded-2xl vocal-shadow p-8 md:p-12 text-center">
           <p className="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">El precio</p>
-          <p className="font-display text-6xl font-bold text-primary mb-2">$37</p>
-          <p className="font-serif text-base text-on-surface-variant mb-6">pago único</p>
+          {promoNavidadActiva() ? (
+            <>
+              <div className="flex justify-center mb-2"><PrecioPromo grande /></div>
+              <p className="font-serif text-base text-on-surface-variant mb-6">
+                pago único · <strong className="text-secondary">incluye tu sesión de una hora conmigo de regalo</strong> si entrás antes del 25 de diciembre
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="font-display text-6xl font-bold text-primary mb-2">$37</p>
+              <p className="font-serif text-base text-on-surface-variant mb-6">pago único</p>
+            </>
+          )}
           <p className="font-serif text-base text-on-surface-variant leading-relaxed mb-6">
             Un curso de canto en español no baja de $55, y los que tienen acompañamiento personal andan entre $65 y $244. Este cuesta menos porque hace una sola cosa — pero la hace entera, y con mi corrección adentro.
           </p>
@@ -331,6 +425,11 @@ export default function SalesPageView() {
           <p className="font-display text-2xl md:text-3xl font-bold text-white leading-snug mb-10">
             Y si el esfuerzo bajó aunque sea un punto, eso se acumula. Dentro de seis meses sos otro cantante.
           </p>
+          {promoNavidadActiva() && (
+            <p className="font-serif text-lg text-white mb-6">
+              Y si entrás antes del 25 de diciembre, la primera vez que me escuchás en vivo es en tu sesión de regalo.
+            </p>
+          )}
           <BotonCompra claro />
         </div>
       </section>
