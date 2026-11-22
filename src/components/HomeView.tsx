@@ -33,30 +33,34 @@ export default function HomeView({ setScreen, onSelectPlan }: HomeViewProps) {
       {/* Hero Section */}
       <section className="relative min-h-[90vh] md:min-h-screen flex items-center pt-24 overflow-hidden bg-surface w-full">
         <div className="max-w-7xl mx-auto px-6 md:px-16 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
-            {/* Promo de Navidad 2026 (Gunnar, 21/11): bien en evidencia y con boton a la pagina de
-                venta, que no tenia ningun acceso desde la portada. Se apaga sola el 26/12. */}
-            {promoNavidadActiva() && (
-              <motion.button
-                type="button"
-                onClick={() => setScreen('venta-agudos')}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="group w-full max-w-xl mb-8 rounded-2xl bg-secondary text-white px-6 py-5 sm:px-7 sm:py-6 text-left shadow-xl hover:shadow-2xl hover:bg-secondary/95 transition-all cursor-pointer"
-              >
+          {/* Promo de Navidad 2026 (Gunnar, 21/11): bien en evidencia, a todo el ancho, y con boton a
+              la pagina de venta, que no tenia ningun acceso desde la portada. Se apaga sola el 26/12. */}
+          {promoNavidadActiva() && (
+            <motion.button
+              type="button"
+              onClick={() => setScreen('venta-agudos')}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="group lg:col-span-12 w-full rounded-2xl bg-secondary text-white px-6 py-5 sm:px-8 sm:py-7 text-left shadow-xl hover:shadow-2xl hover:bg-secondary/95 transition-all cursor-pointer lg:flex lg:items-center lg:gap-10"
+            >
+              <span className="block lg:shrink-0">
                 <span className="flex items-center gap-2 font-sans text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 mb-2">
                   <Gift size={16} /> Promo de Navidad · solo hasta el 25 de diciembre
                 </span>
-                <span className="block mb-3"><PrecioPromo claro /></span>
-                <span className="block font-serif text-sm sm:text-base text-white/90 leading-relaxed mb-4">
+                <span className="block mb-3 lg:mb-0"><PrecioPromo claro /></span>
+              </span>
+              <span className="block lg:flex-1 lg:border-l lg:border-white/25 lg:pl-10">
+                <span className="block font-serif text-sm sm:text-base lg:text-lg text-white/90 leading-relaxed mb-4">
                   <strong className="font-semibold text-white">Tu agudo en 21 días</strong> + una sesión individual de una hora conmigo, de regalo (vale US$55).
                 </span>
                 <span className="inline-flex items-center gap-2 rounded-xl bg-white text-secondary px-5 py-3 font-sans text-xs font-bold uppercase tracking-widest group-hover:gap-3 transition-all">
                   Quiero mi sesión de regalo <ArrowRight size={16} />
                 </span>
-              </motion.button>
-            )}
+              </span>
+            </motion.button>
+          )}
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
             <motion.span
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
